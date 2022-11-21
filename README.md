@@ -74,15 +74,15 @@ result should look like this:
 
 ```js
 const config = {
-	preprocess: [
-		preprocess({
-			postcss: true
-		})
-	],
+  preprocess: [
+    preprocess({
+      postcss: true
+    })
+  ],
 
-	kit: {
-		adapter: adapter()
-	}
+  kit: {
+    adapter: adapter()
+  }
 };
 ```
 
@@ -96,11 +96,11 @@ result should look like this:
 
 ```js
 module.exports = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
-	theme: {
-		extend: {}
-	},
-	plugins: []
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  theme: {
+    extend: {}
+  },
+  plugins: []
 };
 ```
 
@@ -114,7 +114,6 @@ module.exports = {
 
 **step 6:** create `+layout.page` file inside `src` directory and add the following:
 
-
 ```js
 <script>
   import "../app.css";
@@ -122,6 +121,59 @@ module.exports = {
 
 <slot />
 ```
+
+### Fonts
+
+Go to google fonts website choose your font and copy the link tag and paste it inside `src/app.css` file before tailwind imports.
+
+```css
+/* app.css */
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Source+Code+Pro:wght@400;700&family=Source+Sans+Pro:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+open `tailwind.config.cjs` file and add the following:
+
+```js
+/* tailwind.cjs */
+module.exports = {
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  // when we add new font directly to `theme` we owerwrite the default tailwind font family - good for branding use ONLY brand fonts
+  theme: {
+    fontFamily: {
+      sansSerif: ['Source Sans Pro', 'sans-serif'],
+      mono: ['Source Code Pro', 'monospace'],
+      handwriting: ['Kalam', 'cursive']
+    },
+    extend: {
+      // we can add `fontFamily` here if we would like to have access to tailwind predefined font families like `sans` and `serif`
+      // https://tailwindcss.com/docs/font-family
+
+      // we can also add some custom collors here
+      colors: {
+        lavenderIndigo: '#8657e1',
+        daisyBush: '#4714a5',
+        goldenFizz: '#feff40',
+        whisper: '#f9f4f9',
+        pastelPurple: '#b2a1bb',
+        purple: '#7209b7',
+        robinEggBlue: '#00e9c0',
+        blueGem: '#3813a0',
+        caribbeanGreen: '#1CC6A0',
+        scarlet: '#f72f45',
+        monsoon: '#777878',
+        silver: '#c0c0c0',
+        gallery: '#efeaf2',
+        caribbeanGreen: '#00ca9e',
+        fog: '#decaec',
+      },
+    },
+  plugins: []
+};
+```
+
 ---
 
 ### Linting
@@ -131,11 +183,13 @@ module.exports = {
 [prettier-plugin-tailwindcss](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)
 
 **step 1:** uninstall old version of prettier
+
 ```bash
 pnpm uninstall prettier-plugin-svelte
 ```
 
 **step 2:** install new version of prettier
+
 ```bash
 pnpm install -D prettier prettier-plugin-tailwindcss
 ```
@@ -144,22 +198,23 @@ pnpm install -D prettier prettier-plugin-tailwindcss
 
 ```js
 module.exports = {
-	plugins: [require('prettier-plugin-tailwindcss')],
-	tailwindConfig: './tailwind.config.cjs',
-	useTabs: true,
-	singleQuote: true,
-	trailingComma: 'none',
-	printWidth: 100,
-	pluginSearchDirs: ['.'],
-	//overrides: [{ files: '*.svelte', options: { parser: 'svelte' } }]
+  plugins: [require('prettier-plugin-tailwindcss')],
+  tailwindConfig: './tailwind.config.cjs',
+  useTabs: true,
+  singleQuote: true,
+  trailingComma: 'none',
+  printWidth: 100,
+  pluginSearchDirs: ['.']
+  //overrides: [{ files: '*.svelte', options: { parser: 'svelte' } }]
 };
-
 ```
+
 files `.prettierrc` and `.prettier.config.cjs` are identical only difference is in code syntax
 
 now tailwind classes will automatically sort on save
 
 ---
+
 <!-- **step 7:** create `+global.css` file inside `src` directory and add the following:
 
 ```js
@@ -173,4 +228,3 @@ now run the following command to start dev server:
 ```bash
 pnpm dev
 ```
-
