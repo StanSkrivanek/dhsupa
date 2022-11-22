@@ -14,7 +14,7 @@
 }
 @layer components {
   .invoice-table {
-    @apply w-full grid grid-cols-invoiceTable gap-x-4  px-4  mb-3;
+    @apply w-full grid grid-cols-invoiceTable gap-x-4 px-4 lg:px-6 mb-3;
   }
 }
 
