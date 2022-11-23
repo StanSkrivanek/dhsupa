@@ -28,6 +28,6 @@ export const isLate = (myDate: string): boolean => {
  * @param {string} myDate
  * @returns {Array} [yyyy, mm, dd]
  */
-export const splitDate = (myDate: string) => {
+export const splitDate = (myDate: string): Array<string> => {
   return myDate.split('-');
 };

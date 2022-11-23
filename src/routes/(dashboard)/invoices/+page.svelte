@@ -44,10 +44,11 @@
   </div>
 
   <!-- list of invoices -->
-  {#each $invoices as invoice}
-    <!-- content here -->
-    <InvoiceRow {invoice} />
-  {/each}
+  <div class="flex flex-col-reverse">
+    {#each $invoices as invoice}
+      <InvoiceRow invoice={invoice} />
+    {/each}
+  </div>
   <CircledAmount label="Total" amount={`$${centsToDollars(sumInvoices($invoices))}`} />
 </div>
 
