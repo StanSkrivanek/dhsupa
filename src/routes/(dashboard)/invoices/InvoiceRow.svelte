@@ -2,6 +2,7 @@
   import Eye from '$lib/components/Icon/Eye.svelte';
   import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
   import Tag from '$lib/components/Tag.svelte';
+  import { sumLineItems,centsToDolars } from '$lib/utils/moneyHelers';
   export let invoice: Invoice;
 </script>
 
@@ -11,8 +12,10 @@
   <div class="status"><Tag className="ml-auto lg:ml-0" label={invoice.invoiceStatus} /></div>
   <div class="dueDate text-sm lg:text-lg">{invoice.dueDate}</div>
   <div class="invoiceNr text-sm lg:text-lg">{invoice.invoiceNumber}</div>
-  <div class="clientName text-base font-bold lg:text-lg">{invoice.client.name}</div>
-  <div class="amount text-right font-mono text-sm lg:text-lg">$500.00</div>
+  <div class="clientName text-base font-bold lg:text-lg whitespace-nowrap truncate">{invoice.client.name}</div>
+  <div class="amount text-right font-mono text-sm lg:text-lg">
+    ${centsToDolars(sumLineItems(invoice.lineItems))}
+  </div>
   <div class=" viewBtn hidden text-sm lg:block ">
     <a href="/" class=" text-pastelPurple hover:text-daisyBush"><Eye /></a>
   </div>
