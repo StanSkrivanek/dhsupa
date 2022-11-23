@@ -5,12 +5,13 @@
   import CircledAmount from '$lib/components/CircledAmount.svelte';
   import InvoiceRow from './InvoiceRow.svelte';
   import { sumInvoices, centsToDollars } from '$lib/utils/moneyHelers';
+  import BlankState from './BlankState.svelte';
+  import InvoiceRowHeader from './InvoiceRowHeader.svelte';
 
   onMount(() => {
     loadInvoices();
     console.log($invoices);
   });
-
 </script>
 
 <svelte:head>
@@ -20,40 +21,38 @@
 <div
   class="mb-7 flex flex-col-reverse items-start justify-between gap-y-6 md:flex-row md:items-center lg:mb-16"
 >
-  <Search />
+  {#if $invoices.length > 0}
+    <!-- content here -->
+    <Search />
+  {:else}
+    <div />
+    <!-- else content here -->
+  {/if}
   <div>
     <button
       class="relative translate-y-0 whitespace-nowrap rounded-md bg-lavenderIndigo px-5 py-2 font-sansSerif text-base font-black text-white shadow-colored transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-coloredHover lg:px-10 lg:py-3 lg:text-xl"
     >
-      New Invoice</button
+      Add Invoice</button
     >
   </div>
 </div>
 
 <!-- table of invoices -->
 <div>
-  <!-- header -->
-  <div class="table-header invoice-table hidden text-daisyBush lg:grid lg:px-6">
-    <h3>Status</h3>
-    <h3>Due Date</h3>
-    <h3>ID #</h3>
-    <h3>Client</h3>
-    <h3 class="text-right">Amount</h3>
-    <div />
-    <div />
-  </div>
-
-  <!-- list of invoices -->
-  <div class="flex flex-col-reverse">
-    {#each $invoices as invoice}
-      <InvoiceRow invoice={invoice} />
-    {/each}
-  </div>
-  <CircledAmount label="Total" amount={`$${centsToDollars(sumInvoices($invoices))}`} />
+  {#if $invoices === null}
+    <!-- content here -->
+    Lodaing...
+  {:else if $invoices.length <= 0}
+    <BlankState />
+  {:else}
+    <!-- list of invoices -->
+    <InvoiceRowHeader className="text-daisyBush" />
+    <div class="flex flex-col-reverse">
+      <!-- header -->
+      {#each $invoices as invoice}
+        <InvoiceRow {invoice} />
+      {/each}
+    </div>
+    <CircledAmount label="Total" amount={`$${centsToDollars(sumInvoices($invoices))}`} />
+  {/if}
 </div>
-
-<style lang="postcss">
-  .table-header h3 {
-    @apply font-sansSerif text-xl font-black leading-snug;
-  }
-</style>
