@@ -14,7 +14,7 @@ interface Invoice {
 
 interface Client {
   id: string;
-  clientStatus: ClientStatus;
+  clientStatus?: ClientStatus;
   name: string;
   email: string;
   street: string;
