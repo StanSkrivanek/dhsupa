@@ -7,10 +7,11 @@
   import { sumInvoices, centsToDollars } from '$lib/utils/moneyHelers';
   import BlankState from './BlankState.svelte';
   import InvoiceRowHeader from './InvoiceRowHeader.svelte';
+  import Portal from '$lib/components/Portal.svelte';
 
   onMount(() => {
     loadInvoices();
-    console.log($invoices);
+    // console.log($invoices);
   });
 </script>
 
@@ -22,11 +23,9 @@
   class="mb-7 flex flex-col-reverse items-start justify-between gap-y-6 md:flex-row md:items-center lg:mb-16"
 >
   {#if $invoices.length > 0}
-    <!-- content here -->
     <Search />
   {:else}
     <div />
-    <!-- else content here -->
   {/if}
   <div>
     <button
@@ -39,6 +38,7 @@
 
 <!-- table of invoices -->
 <div>
+  <Portal><div>Invoice Form</div></Portal>
   {#if $invoices === null}
     <!-- content here -->
     Lodaing...
@@ -48,7 +48,6 @@
     <!-- list of invoices -->
     <InvoiceRowHeader className="text-daisyBush" />
     <div class="flex flex-col-reverse">
-      <!-- header -->
       {#each $invoices as invoice}
         <InvoiceRow {invoice} />
       {/each}

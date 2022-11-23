@@ -5,6 +5,7 @@ export const invoices = writable<Invoice[]>([]);
 
 export const loadInvoices = async () => {
 // invoices.set(data.invoices)
-invoices.set([])
+// invoices.set([])
+invoices.set(data.invoices)
 
 }
