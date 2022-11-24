@@ -8,7 +8,7 @@
   const dispatch = createEventDispatcher();
 </script>
 
-<!-- close modal on click outside -->
+<!-- close modal on `escape` -->
 <svelte:window on:keydown={(e)=>{
   if (e.key === 'Escape') {
     dispatch('close');
