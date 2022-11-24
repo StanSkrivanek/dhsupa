@@ -1,5 +1,6 @@
 <script>
   import Button from './Button.svelte';
+  import Trash from './Icon/Trash.svelte';
 </script>
 
 <h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush ">Add an Invoice</h2>
@@ -12,9 +13,9 @@
       <option value="cname">Client Name</option>
     </select>
   </div>
-  <div class="field col-span-3 flex items-end">
-    <div class=" make-bold text-base leading-[3.5rem] text-monsoon">or</div>
-    <Button label="add client" onButtonClick={() => {}} />
+  <div class="field col-span-2 flex items-end gap-x-5">
+    <div class=" font-bold text-base leading-[3.5rem] text-monsoon">or</div>
+    <Button label="add client" onButtonClick={() => {}} style="outlined" isAnimated={false}/>
   </div>
   <!-- invoice ID -->
   <div class="field col-span-2 ">
@@ -59,10 +60,10 @@
   <!-- buttons -->
   <!-- show delete btn only in EDIT mode -->
   <div class="field col-span-2">
-    <Button label="Delete" onButtonClick={() => {}} />
+    <Button style="textOnly" label="Delete" onButtonClick={() => {}} isAnimated={false} iconLeft={Trash}/>
   </div>
-  <div class="field col-span-4 flex justify-end gap-4">
-    <Button label="Cancel" onButtonClick={() => {}} />
-    <Button label="Save" onButtonClick={() => {}} />
+  <div class="field col-span-4 flex justify-end gap-x-4">
+    <Button style="secondary" label="Cancel" onButtonClick={() => {}} isAnimated={false}/>
+    <Button  label="Save" onButtonClick={() => {}} isAnimated={false}/>
   </div>
 </form>
