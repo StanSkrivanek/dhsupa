@@ -60,7 +60,11 @@ module.exports = {
         navBar: '90'
       },
       backgroundImage: {
-        circle: "url('/images/svg/hand-circle.svg')"
+        circle: "url('/images/svg/hand-circle.svg')",
+        chevronDown: "url('/images/svg/chevron--down.svg')"
+      },
+      backgroundPosition: {
+        'right-center': '97% center'
       }
     },
     plugins: []
