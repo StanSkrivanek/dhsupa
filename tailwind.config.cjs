@@ -39,7 +39,7 @@ module.exports = {
         gallery: '#efeaf2',
         caribbeanGreen: '#00ca9e',
         fog: '#decaec',
-        prim:'#edebef',
+        prim: '#edebef'
       },
       gridTemplateColumns: {
         invoiceTable: '100px 100px 60px 1fr 116px 32px 32px',
@@ -52,6 +52,8 @@ module.exports = {
         64: '16rem'
       },
       zIndex: {
+        overlay: 998,
+        modal: 999,
         navBarToggle: '91',
         navBar: '90'
       },
