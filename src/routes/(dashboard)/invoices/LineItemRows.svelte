@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import LineItemRow from './LineItemRow.svelte';
   import Button from '$lib/components/Button.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';
   export let lineItems: LineItem[] | undefined = undefined;
+  let dispatch = createEventDispatcher();
 </script>
 
 <!-- header -->
@@ -16,14 +18,21 @@
 {#if lineItems}
   <!-- content here -->
   {#each lineItems as lineItem}
-    <LineItemRow {lineItem} />
+    <LineItemRow {lineItem} on:removeLineItem />
   {/each}
 {/if}
 
 <!-- sum -->
 <div class="invoice-line-item">
   <div class="col-span-2">
-    <Button label="add line" style="textOnly" onButtonClick={() => {}} isAnimated={false} />
+    <Button
+      label="add line"
+      style="textOnly"
+      onButtonClick={() => {
+        dispatch('addLineItem');
+      }}
+      isAnimated={false}
+    />
   </div>
   <div class="py-4 text-right font-bold text-monsoon ">Subtotal</div>
   <div class="py-4 text-right font-mono">$250.00</div>

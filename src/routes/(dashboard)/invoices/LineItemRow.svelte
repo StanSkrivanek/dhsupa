@@ -1,5 +1,9 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
+
+  export let lineItem: LineItem;
+  let dispatch = createEventDispatcher();
 </script>
 
 <!-- Structure -->
@@ -17,7 +21,11 @@
     <input class="line-item text-right" type="number" name="amount" step="0.01" min="0" />
   </div>
   <div>
-    <button class="center h-10 w-10 text-pastelPurple hover:text-lavenderIndigo" type="button">
+    <button
+      class="center h-10 w-10 text-pastelPurple hover:text-lavenderIndigo"
+      type="button"
+      on:click|preventDefault={() => dispatch('removeLineItem', lineItem.id)}
+    >
       <Trash />
     </button>
   </div>

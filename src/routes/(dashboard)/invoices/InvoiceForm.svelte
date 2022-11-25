@@ -1,16 +1,24 @@
-<script>
+<script lang="ts">
+  import { v4 as uuidv4 } from 'uuid';
   import LineItemRows from './LineItemRows.svelte';
   import Button from '$lib/components/Button.svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
-  const blankLineItem = [{
-    id:"1",
-    description: 'item 1',
+  const blankLineItem = {
+    id: uuidv4(),
+    description: '',
     unitPrice: 0,
     quantity: 0,
-    amount: 0,
-  },
+    amount: 0
+  };
 
-  ];
+  let lineItems: LineItem[] = [blankLineItem];
+
+  const addLineItem = () => {
+    lineItems = [...lineItems, { ...blankLineItem, id: uuidv4() }];
+  };
+  const deleteLineItem = (event: any) => {
+    lineItems = lineItems.filter((item) => item.id !== event.detail);
+  };
 </script>
 
 <h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush ">Add an Invoice</h2>
@@ -24,8 +32,8 @@
     </select>
   </div>
   <div class="field col-span-2 flex items-end gap-x-5">
-    <div class=" font-bold text-base leading-[3.5rem] text-monsoon">or</div>
-    <Button label="add client" onButtonClick={() => {}} style="outlined" isAnimated={false}/>
+    <div class=" text-base font-bold leading-[3.5rem] text-monsoon">or</div>
+    <Button label="add client" onButtonClick={() => {}} style="outlined" isAnimated={false} />
   </div>
   <!-- invoice ID -->
   <div class="field col-span-2 ">
@@ -52,7 +60,7 @@
   <!-- line Items -->
   <div class="field col-span-6 ">
     <!-- <label for="lineItems">Line Items</label> -->
-    <LineItemRows lineItems={blankLineItem}/>
+    <LineItemRows {lineItems} on:addLineItem={addLineItem} on:removeLineItem={deleteLineItem} />
   </div>
 
   <!-- notes -->
@@ -69,16 +77,23 @@
     >
     <textarea name="terms" id="terms" />
     <div class="text-xs text-gray-400">
-      Formatting tips: <strong>*bold*</strong>,  <em>_italic_</em>,  <code>`code`</code>,  <del>~strikethrough~</del>
+      Formatting tips: <strong>*bold*</strong>, <em>_italic_</em>, <code>`code`</code>,
+      <del>~strikethrough~</del>
     </div>
   </div>
   <!-- buttons -->
   <!-- show delete btn only in EDIT mode -->
   <div class="field col-span-2">
-    <Button style="textOnlyDestructive" label="Delete" onButtonClick={() => {}} isAnimated={false} iconLeft={Trash}/>
+    <Button
+      style="textOnlyDestructive"
+      label="Delete"
+      onButtonClick={() => {}}
+      isAnimated={false}
+      iconLeft={Trash}
+    />
   </div>
   <div class="field col-span-4 flex justify-end gap-x-4">
-    <Button style="secondary" label="Cancel" onButtonClick={() => {}} isAnimated={false}/>
-    <Button  label="Save" onButtonClick={() => {}} isAnimated={false}/>
+    <Button style="secondary" label="Cancel" onButtonClick={() => {}} isAnimated={false} />
+    <Button label="Save" onButtonClick={() => {}} isAnimated={false} />
   </div>
 </form>
