@@ -8,7 +8,16 @@
   body {
     @apply font-sansSerif;
   }
-
+  /* hide arrows on number input field -> */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  /* <- hide arrows on number input field */
   label {
     @apply block font-sansSerif text-base font-bold text-monsoon;
   }

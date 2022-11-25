@@ -48,3 +48,11 @@ export const sumInvoices = (invoices: Invoice[] | undefined): number => {
   if (!invoices) return 0;
   return invoices.reduce((prevValue, curValue) => prevValue + sumLineItems(curValue.lineItems), 0);
 };
+/**
+ * convert amount in decimal format to cents
+ * @param {number} dollars
+ * @returns {number}
+ */
+export const dollarsToCents = (dollars: number): number => {
+  return dollars * 100;
+};

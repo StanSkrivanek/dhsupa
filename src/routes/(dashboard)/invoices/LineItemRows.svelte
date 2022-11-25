@@ -10,15 +10,15 @@
 <!-- header -->
 <div class="invoice-line-item border-b-2 border-daisyBush pb-2">
   <div class="table-header">Description</div>
-  <div class="table-header">Unit Price</div>
-  <div class="table-header">Qyt</div>
-  <div class="table-header">Amount</div>
+  <div class="table-header text-right">Unit Price</div>
+  <div class="table-header text-right">Qyt</div>
+  <div class="table-header text-right">Amount</div>
 </div>
 <!-- Lines -->
 {#if lineItems}
   <!-- content here -->
-  {#each lineItems as lineItem}
-    <LineItemRow {lineItem} on:removeLineItem />
+  {#each lineItems as lineItem, idx}
+    <LineItemRow {lineItem} on:removeLineItem canDelete={idx > 0} />
   {/each}
 {/if}
 
