@@ -2,7 +2,13 @@
   import type { SvelteComponent } from 'svelte'; // for adding icons to button
   export let label: string;
   export let isAnimated = true;
-  export let style: 'primary' | 'secondary' | 'destructive' | 'outlined' | 'textOnly' = 'primary';
+  export let style:
+    | 'primary'
+    | 'secondary'
+    | 'destructive'
+    | 'outlined'
+    | 'textOnly'
+    | 'textOnlyDestructive' = 'primary';
   export let onButtonClick: () => void;
   export let iconLeft: (new (...args: any[]) => SvelteComponent) | null = null;
   export let iconRight: (new (...args: any[]) => SvelteComponent) | null = null;
@@ -12,12 +18,13 @@
 </script>
 
 <button
-  class=" flex items-center relative whitespace-nowrap rounded-md px-5 py-2 font-sansSerif text-base font-black  lg:px-10 lg:py-3 lg:text-xl"
+  class=" relative flex items-center whitespace-nowrap rounded-md px-5 py-2 font-sansSerif text-base font-black  lg:px-10 lg:py-3 lg:text-xl"
   class:primary={style === 'primary'}
   class:secondary={style === 'secondary'}
   class:destructive={style === 'destructive'}
   class:outlined={style === 'outlined'}
   class:textOnly={style === 'textOnly'}
+  class:textOnlyDestructive={style === 'textOnlyDestructive'}
   class:isAnimated
   on:click|preventDefault={() => onButtonClick()}
 >
@@ -53,6 +60,9 @@
     @apply border-2 border-daisyBush text-daisyBush hover:bg-daisyBush hover:text-white;
   }
   .textOnly {
+    @apply bg-transparent px-0 text-lavenderIndigo no-underline hover:underline;
+  }
+  .textOnlyDestructive {
     @apply bg-transparent px-0 text-scarlet underline hover:no-underline;
   }
 </style>

@@ -9,7 +9,7 @@
   import InvoiceRowHeader from './InvoiceRowHeader.svelte';
   import Button from '$lib/components/Button.svelte';
   import SlidePanel from '$lib/components/SlidePanel.svelte';
-  import InvoiceForm from '$lib/components/InvoiceForm.svelte';
+  import InvoiceForm from './InvoiceForm.svelte';
 
   onMount(() => {
     loadInvoices();

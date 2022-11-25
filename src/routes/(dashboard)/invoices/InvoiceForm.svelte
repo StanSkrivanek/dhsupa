@@ -1,6 +1,16 @@
 <script>
-  import Button from './Button.svelte';
-  import Trash from './Icon/Trash.svelte';
+  import LineItemRows from './LineItemRows.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Trash from '$lib/components/Icon/Trash.svelte';
+  const blankLineItem = [{
+    id:"1",
+    description: 'item 1',
+    unitPrice: 0,
+    quantity: 0,
+    amount: 0,
+  },
+
+  ];
 </script>
 
 <h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush ">Add an Invoice</h2>
@@ -38,8 +48,13 @@
     <label for="subject">Subject</label>
     <input type="text" name="subject" id="" />
   </div>
+
   <!-- line Items -->
-  <div class="field col-span-6 ">lineItems</div>
+  <div class="field col-span-6 ">
+    <!-- <label for="lineItems">Line Items</label> -->
+    <LineItemRows lineItems={blankLineItem}/>
+  </div>
+
   <!-- notes -->
   <div class="field col-span-6 ">
     <label for="notes"
@@ -60,7 +75,7 @@
   <!-- buttons -->
   <!-- show delete btn only in EDIT mode -->
   <div class="field col-span-2">
-    <Button style="textOnly" label="Delete" onButtonClick={() => {}} isAnimated={false} iconLeft={Trash}/>
+    <Button style="textOnlyDestructive" label="Delete" onButtonClick={() => {}} isAnimated={false} iconLeft={Trash}/>
   </div>
   <div class="field col-span-4 flex justify-end gap-x-4">
     <Button style="secondary" label="Cancel" onButtonClick={() => {}} isAnimated={false}/>
