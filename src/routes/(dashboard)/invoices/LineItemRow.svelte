@@ -9,7 +9,7 @@
   let dispatch = createEventDispatcher();
   let unitPrice: string = twoDecimals(lineItem.amount / lineItem.quantity);
   let amount = twoDecimals(lineItem.amount);
-  // chamge values on the fly reactivly
+
   $: {
     amount = twoDecimals(lineItem.quantity * Number(unitPrice));
     lineItem.amount = dollarsToCents(Number(amount));
@@ -31,6 +31,7 @@
       bind:value={unitPrice}
       on:blur={() => {
         unitPrice = twoDecimals(Number(unitPrice));
+        dispatch('updateLineItem', lineItem);
       }}
     />
   </div>
@@ -41,6 +42,9 @@
       name="quantity"
       min="0"
       bind:value={lineItem.quantity}
+      on:blur={() => {
+        dispatch('updateLineItem', lineItem);
+      }}
     />
   </div>
   <div>

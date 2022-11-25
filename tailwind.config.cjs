@@ -45,7 +45,7 @@ module.exports = {
       gridTemplateColumns: {
         invoiceTable: '100px 100px 60px 1fr 116px 32px 32px',
         invoiceTableMobile: '1fr 90px',
-        invoiceLineItem: '1fr 100px 100px 100px 65px',
+        invoiceLineItem: '1fr 100px 100px 100px 65px'
       },
       minHeight: {
         24: '6rem'
@@ -55,7 +55,7 @@ module.exports = {
       },
       zIndex: {
         modal: 999,
-        slidePanel:998,
+        slidePanel: 998,
         overlay: 997,
         navBarToggle: '91',
         navBar: '90'

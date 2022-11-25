@@ -11,13 +11,16 @@
     amount: 0
   };
 
-  let lineItems: LineItem[] = [{...blankLineItem}];
+  let lineItems: LineItem[] = [{ ...blankLineItem }];
 
   const addLineItem = () => {
     lineItems = [...lineItems, { ...blankLineItem, id: uuidv4() }];
   };
   const deleteLineItem = (event: any) => {
     lineItems = lineItems.filter((item) => item.id !== event.detail);
+  };
+  const UpdateLineItem = () => {
+    lineItems = lineItems;
   };
 </script>
 
@@ -60,7 +63,12 @@
   <!-- line Items -->
   <div class="field col-span-6 ">
     <!-- <label for="lineItems">Line Items</label> -->
-    <LineItemRows {lineItems} on:addLineItem={addLineItem} on:removeLineItem={deleteLineItem} />
+    <LineItemRows
+      {lineItems}
+      on:addLineItem={addLineItem}
+      on:removeLineItem={deleteLineItem}
+      on:updateLineItem={UpdateLineItem}
+    />
   </div>
 
   <!-- notes -->
