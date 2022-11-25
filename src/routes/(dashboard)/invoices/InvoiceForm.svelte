@@ -1,8 +1,10 @@
 <script lang="ts">
   import { v4 as uuidv4 } from 'uuid';
+  import { slide } from 'svelte/transition';
   import LineItemRows from './LineItemRows.svelte';
   import Button from '$lib/components/Button.svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
+  import { states } from '$lib/utils/states';
   const blankLineItem = {
     id: uuidv4(),
     description: '',
@@ -12,6 +14,7 @@
   };
 
   let lineItems: LineItem[] = [{ ...blankLineItem }];
+  let isNewClient = false;
 
   const addLineItem = () => {
     lineItems = [...lineItems, { ...blankLineItem, id: uuidv4() }];
@@ -28,21 +31,78 @@
 
 <form action="" class="grid grid-cols-6 gap-x-5">
   <!-- client -->
-  <div class=" field col-span-2">
-    <label for="client">Client</label>
-    <select name="client" id="client">
-      <option value="cname">Client Name</option>
-    </select>
+  <div class=" field col-span-4">
+    {#if !isNewClient}
+      <label for="client">Client</label>
+      <div class="flex items-end gap-x-4">
+        <select name="client" id="client">
+          <option value="cname">Client Name</option>
+        </select>
+
+        <div class=" text-base font-bold leading-[3.5rem] text-monsoon">or</div>
+        <Button
+          label="add client"
+          onButtonClick={() => {
+            isNewClient = true;
+          }}
+          style="outlined"
+          isAnimated={false}
+        />
+      </div>
+    {:else}
+      <!-- show other form fields-->
+      <label for="newclient">Client</label>
+      <div class="flex items-end gap-x-4">
+        <input type="text" name="newclient" id="newclient" placeholder="Client Name" />
+        <div class=" text-base font-bold leading-[3.5rem] text-monsoon">or</div>
+        <Button
+          label="Existing Client"
+          onButtonClick={() => {
+            isNewClient = false;
+          }}
+          style="outlined"
+          isAnimated={false}
+        />
+      </div>
+    {/if}
   </div>
-  <div class="field col-span-2 flex items-end gap-x-5">
-    <div class=" text-base font-bold leading-[3.5rem] text-monsoon">or</div>
-    <Button label="add client" onButtonClick={() => {}} style="outlined" isAnimated={false} />
-  </div>
+
   <!-- invoice ID -->
   <div class="field col-span-2 ">
     <label for="id">InvoiceId</label>
     <input type="number" name="id" id="" />
   </div>
+
+  <!-- new client details -->
+  {#if isNewClient}
+    <div class="field col-span-6 grid gap-x-4" transition:slide>
+      <div class=" field col-span-6">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" />
+      </div>
+      <div class="field col-span-6">
+        <label for="street">Street</label>
+        <input type="text" name="street" id="street" />
+      </div>
+      <div class="field col-span-2">
+        <label for="city">City</label>
+        <input type="text" name="city" id="city" />
+      </div>
+      <div class="field col-span-2">
+        <label for="state">State</label>
+        <select name="state" id="state">
+          <option />
+          {#each states as state}
+            <option value={state.value}>{state.name}</option>
+          {/each}
+        </select>
+      </div>
+      <div class="field col-span-2">
+        <label for="postcode">Post Code</label>
+        <input type="text" name="postcode" id="postcode" />
+      </div>
+    </div>
+  {/if}
   <!-- dueDate -->
   <div class="field col-span-2 ">
     <label for="dueDate">Due Date</label>
