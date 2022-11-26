@@ -18,7 +18,7 @@
 </script>
 
 <button
-  class=" relative flex items-center whitespace-nowrap rounded-md px-5 py-2 font-sansSerif text-base font-black  lg:px-10 lg:py-3 lg:text-xl"
+  class="button"
   class:primary={style === 'primary'}
   class:secondary={style === 'secondary'}
   class:destructive={style === 'destructive'}

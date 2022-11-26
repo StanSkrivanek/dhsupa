@@ -1,4 +1,11 @@
-import { isBefore } from 'date-fns';
+import { isBefore, format } from 'date-fns';
+// https://date-fns.org/docs/Getting-Started
+/**
+ * Returns a date formatted as a string
+ * @param {string} date - Date to format
+ * @returns {string} - Formatted date
+ */
+export const today = format(new Date(), 'yyyy-MM-dd');
 
 /**
  * function takes date format yyyy-mm-dd and returns dd-mm-yyyy

@@ -5,6 +5,7 @@
 
   export let lineItem: LineItem;
   export let canDelete: boolean = false;
+  export let isRequired: boolean = false;
 
   let dispatch = createEventDispatcher();
   let unitPrice: string = twoDecimals(lineItem.amount / lineItem.quantity);
@@ -19,7 +20,13 @@
 <!-- Structure -->
 <div class="invoice-line-item border-b-2 border-fog py-2">
   <div>
-    <input class="line-item" type="text" name="description" bind:value={lineItem.description} />
+    <input
+      class="line-item"
+      type="text"
+      name="description"
+      bind:value={lineItem.description}
+      required={isRequired}
+    />
   </div>
   <div>
     <input
@@ -33,9 +40,11 @@
         unitPrice = twoDecimals(Number(unitPrice));
         dispatch('updateLineItem', lineItem);
       }}
+      required={isRequired}
     />
   </div>
   <div>
+    <!-- TODO: quantity 0 is considered as init value and required is fulfilled on form load. Form can be submitted with Qty 0 FIX: make quantity to be empty on form load-->
     <input
       class="line-item text-right"
       type="number"
@@ -45,6 +54,7 @@
       on:blur={() => {
         dispatch('updateLineItem', lineItem);
       }}
+      required={isRequired}
     />
   </div>
   <div>

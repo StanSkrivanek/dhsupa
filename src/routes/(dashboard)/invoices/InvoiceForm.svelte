@@ -6,7 +6,8 @@
   import Button from '$lib/components/Button.svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
   import { states } from '$lib/utils/states';
-  import { clients, loadClients }from '$stores/ClientStore';
+  import { clients, loadClients } from '$stores/ClientStore';
+  import { today } from '$lib/utils/dateHelpers';
 
   const blankLineItem = {
     id: uuidv4(),
@@ -44,8 +45,8 @@
       <div class="flex items-end gap-x-4">
         <select name="client" id="client">
           {#each $clients as client}
-             <!-- content here -->
-             <option value={client.id}>{client.name}</option>
+            <!-- content here -->
+            <option value={client.id}>{client.name}</option>
           {/each}
         </select>
 
@@ -79,8 +80,8 @@
 
   <!-- invoice ID -->
   <div class="field col-span-2 ">
-    <label for="id">InvoiceId</label>
-    <input type="number" name="id" id="" />
+    <label for="invoiceNr">Invoice Nr</label>
+    <input type="number" name="invoiceNr" id="" required />
   </div>
 
   <!-- new client details -->
@@ -116,13 +117,13 @@
   <!-- dueDate -->
   <div class="field col-span-2 ">
     <label for="dueDate">Due Date</label>
-    <input type="date" name="dueDate" id="" />
+    <input type="date" name="dueDate" id="" min={today} required />
   </div>
 
   <!-- issue date -->
   <div class="field col-span-2 col-start-5">
     <label for="issueDate">Issue Date</label>
-    <input type="date" name="issueDate" id="" />
+    <input type="date" name="issueDate" id="" min={today} />
   </div>
   <!-- subject -->
   <div class="field col-span-6 ">
@@ -172,6 +173,11 @@
   </div>
   <div class="field col-span-4 flex justify-end gap-x-4">
     <Button style="secondary" label="Cancel" onButtonClick={() => {}} isAnimated={false} />
-    <Button label="Save" onButtonClick={() => {}} isAnimated={false} />
+    <!-- <Button label="Save" onButtonClick={() => {}} isAnimated={false} /> -->
+    <button
+      type="submit"
+      class="button translate-y-0 bg-lavenderIndigo text-white shadow-colored transition-all duration-300 ease-in-out"
+      >save</button
+    >
   </div>
 </form>

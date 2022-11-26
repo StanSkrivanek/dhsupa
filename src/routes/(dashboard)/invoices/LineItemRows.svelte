@@ -31,9 +31,9 @@
 </div>
 <!-- Lines -->
 {#if lineItems}
-  <!-- content here -->
+  <!-- apply isRequired ONLY for first line (set on LineItemRow)-->
   {#each lineItems as lineItem, idx}
-    <LineItemRow {lineItem} on:removeLineItem canDelete={idx > 0} on:updateLineItem />
+    <LineItemRow {lineItem} on:removeLineItem canDelete={idx > 0} on:updateLineItem isRequired={idx === 0}/>
   {/each}
 {/if}
 
