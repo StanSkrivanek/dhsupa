@@ -1,9 +1,9 @@
 interface Invoice {
   id: string;
+  client: Client;
   invoiceStatus: InvoiceStatus;
   issueDate: string;
   invoiceNumber: string;
-  client: Client;
   dueDate: string;
   subject?: string;
   lineItems?: LineItem[];
