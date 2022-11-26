@@ -24,7 +24,7 @@ export const centsToDollars = (cents: number): string => {
  * @param {number} num
  * @returns {string}
  */
-export const twoDecimals = (num: number): string => {
+export const twoDecimals = (num: number ): string => {
   return num.toFixed(2);
 };
 

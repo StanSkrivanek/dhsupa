@@ -6,20 +6,24 @@
   import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelers';
   export let lineItems: LineItem[] | undefined = undefined;
 
-  let subtotal: string = '0.00';
+  let subtotal: number = 0;
   let discount: number = 0;
-  let discountedAmount: string = '0.00';
-  let total: string = '0.00';
+  let discountedAmount: number = 0;
+  let total: number = 0;
   let dispatch = createEventDispatcher();
 
+  $: console.log('sub', subtotal, 'disc', discountedAmount, 'tot', total);
+
+  // subtotal in cents
   $: if (sumLineItems(lineItems) > 0) {
-    subtotal = centsToDollars(sumLineItems(lineItems));
+    subtotal = sumLineItems(lineItems);
   }
-  // update dsiount value based on perCent
-  $: if (subtotal !== '0.00') {
-    discountedAmount = centsToDollars(sumLineItems(lineItems) * (discount / 100));
+  // update discount value based on perCent in cents
+  $: if (subtotal >= 0) {
+    discountedAmount = sumLineItems(lineItems) * (discount / 100);
   }
-  $: total = twoDecimals(((parseInt(subtotal) - parseInt(discountedAmount)) * 100)/100);
+  // Number is returning correct price after discount in cents
+  $: total = Number(subtotal) - Number(discountedAmount);
 </script>
 
 <!-- header -->
@@ -33,7 +37,13 @@
 {#if lineItems}
   <!-- apply isRequired ONLY for first line (set on LineItemRow)-->
   {#each lineItems as lineItem, idx}
-    <LineItemRow {lineItem} on:removeLineItem canDelete={idx > 0} on:updateLineItem isRequired={idx === 0}/>
+    <LineItemRow
+      {lineItem}
+      on:removeLineItem
+      canDelete={idx > 0}
+      on:updateLineItem
+      isRequired={idx === 0}
+    />
   {/each}
 {/if}
 
@@ -50,7 +60,7 @@
     />
   </div>
   <div class="py-4 text-right font-bold text-monsoon ">Subtotal</div>
-  <div class="py-4 text-right font-mono">${subtotal}</div>
+  <div class="py-4 text-right font-mono">${centsToDollars(subtotal)}</div>
 </div>
 
 <div class="invoice-line-item">
@@ -66,12 +76,12 @@
     />
     <span class="text-mono absolute right-0 top-2">%</span>
   </div>
-  <div class="py-4 text-right font-mono">${discountedAmount}</div>
+  <div class="py-4 text-right font-mono">${centsToDollars(discountedAmount)}</div>
 </div>
 
 <div class="invoice-line-item">
   <div class="col-span-6">
-    <CircledAmount label="Total:" amount={`$${total}`} />
+    <CircledAmount label="Total:" amount={`$${centsToDollars(total)}`} />
   </div>
 </div>
 

@@ -8,16 +8,19 @@
   body {
     @apply font-sansSerif;
   }
-  /* hide arrows on number input field -> */
+
+  /* hide arrows on number input field Chrome | Safari | Edge | Opera -> */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
+  /* Firefox -> */
   input[type='number'] {
     -moz-appearance: textfield;
   }
   /* <- hide arrows on number input field */
+
   label {
     @apply block font-sansSerif text-base font-bold text-monsoon;
   }
