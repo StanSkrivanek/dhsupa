@@ -7,6 +7,7 @@ interface Invoice {
   dueDate: string;
   subject?: string;
   lineItems?: LineItem[];
+  discount?: number;
   notes?: string;
   terms?: string;
   createdAt: string;
@@ -17,10 +18,10 @@ interface Client {
   clientStatus?: ClientStatus;
   name: string;
   email: string;
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
+  street?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
 }
 
 interface LineItem {

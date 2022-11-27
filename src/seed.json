@@ -36,6 +36,7 @@
       "createdAt": "2022-07-01"
     },
     {
+      "id": "2",
       "client": {
         "id": "1",
         "clientStatus": "active",
@@ -48,7 +49,6 @@
       },
       "createdAt": "2022-07-01",
       "dueDate": "2022-07-06",
-      "id": "2",
       "invoiceNumber": "12352",
       "invoiceStatus": "draft",
       "issueDate": "2022-07-08",
@@ -155,7 +155,7 @@
   ],
   "clients": [
     {
-      "address": "123 Street",
+      "street": "123 Street",
       "city": "Somewhereville",
       "email": "compressed@example.com",
       "id": "1",
@@ -164,7 +164,7 @@
       "zip": "12345"
     },
     {
-      "address": "456 Drive",
+      "street": "456 Drive",
       "city": "Nowhere",
       "email": "everythingsvelte@test.com",
       "id": "2",
@@ -173,7 +173,7 @@
       "zip": "67890"
     },
     {
-      "address": "789 Boulevard",
+      "street": "789 Boulevard",
       "city": "Anywhere",
       "email": "zeal@test.com",
       "id": "3",

@@ -5,3 +5,7 @@ export const clients = writable<Client[]>([]);
 export const loadClients = async () => {
   clients.set(data.clients);
 }
+export const addClient = (clientToAdd: Client) => {
+  clients.update((prev: Client[]) => [...prev, clientToAdd]);
+  return clientToAdd;
+}

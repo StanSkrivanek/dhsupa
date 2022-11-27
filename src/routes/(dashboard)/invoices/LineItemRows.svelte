@@ -4,15 +4,16 @@
   import Button from '$lib/components/Button.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';
   import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelers';
+
   export let lineItems: LineItem[] | undefined = undefined;
+  export let discount: number = 0;
 
   let subtotal: number = 0;
-  let discount: number = 0;
   let discountedAmount: number = 0;
   let total: number = 0;
   let dispatch = createEventDispatcher();
 
-  $: console.log('sub', subtotal, 'disc', discountedAmount, 'tot', total);
+  // $: console.log('sub', subtotal, 'disc', discountedAmount, 'tot', total);
 
   // subtotal in cents
   $: if (sumLineItems(lineItems) > 0) {
@@ -23,7 +24,7 @@
     discountedAmount = sumLineItems(lineItems) * (discount / 100);
   }
   // Number is returning correct price after discount in cents
-  $: total = Number(subtotal) - Number(discountedAmount);
+  $: total = Number(subtotal) - Number(discountedAmount) || 0;
 </script>
 
 <!-- header -->
@@ -76,7 +77,7 @@
     />
     <span class="text-mono absolute right-0 top-2">%</span>
   </div>
-  <div class="py-4 text-right font-mono">${centsToDollars(discountedAmount)}</div>
+  <div class="py-4 text-right font-mono">${discountedAmount ? centsToDollars(discountedAmount): "0.00"}</div>
 </div>
 
 <div class="invoice-line-item">
