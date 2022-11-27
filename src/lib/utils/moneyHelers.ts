@@ -24,7 +24,7 @@ export const centsToDollars = (cents: number): string => {
  * @param {number} num
  * @returns {string}
  */
-export const twoDecimals = (num: number ): string => {
+export const twoDecimals = (num: number): string => {
   return num.toFixed(2);
 };
 
@@ -55,4 +55,24 @@ export const sumInvoices = (invoices: Invoice[] | undefined): number => {
  */
 export const dollarsToCents = (dollars: number): number => {
   return dollars * 100;
+};
+
+/**
+ * takes lineItems nad discount and returns the invoice total
+ * @param {Array | undefined} lineItems
+ * @param {number | undefined} discount
+ * @returns {number}
+ */
+
+export const invoiceTotal = (
+  lineItems: LineItem[] | undefined,
+  discount: number | undefined
+): number => {
+  console.log('lineItems', lineItems, 'discount', discount);
+  const lineItemsSum = sumLineItems(lineItems);
+  if (discount) {
+    const invoiceDiscount = lineItemsSum * (discount / 100);
+    return lineItemsSum - invoiceDiscount;
+  }
+  return lineItemsSum;
 };

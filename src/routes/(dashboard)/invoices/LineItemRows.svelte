@@ -4,14 +4,14 @@
   import Button from '$lib/components/Button.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';
   import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelers';
-
+  
+  let dispatch = createEventDispatcher();
   export let lineItems: LineItem[] | undefined = undefined;
   export let discount: number = 0;
 
   let subtotal: number = 0;
   let discountedAmount: number = 0;
   let total: number = 0;
-  let dispatch = createEventDispatcher();
 
   // $: console.log('sub', subtotal, 'disc', discountedAmount, 'tot', total);
 
@@ -74,6 +74,9 @@
       min="0"
       max="100"
       bind:value={discount}
+      on:change={() => {
+        dispatch('updateDiscount', {discount});
+      }}
     />
     <span class="text-mono absolute right-0 top-2">%</span>
   </div>

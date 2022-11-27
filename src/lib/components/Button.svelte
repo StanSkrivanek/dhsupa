@@ -29,11 +29,15 @@
   on:click|preventDefault={() => onButtonClick()}
 >
   {#if iconLeft}
-    <svelte:component this={iconLeft} class="ml-2" />
+    <div class="ml-2">
+      <svelte:component this={iconLeft} />
+    </div>
   {/if}
   {label}
   {#if iconRight}
-    <svelte:component this={iconRight} class="ml-2" />
+    <div class="ml-2">
+      <svelte:component this={iconRight} class="ml-2" />
+    </div>
   {/if}
 </button>
 

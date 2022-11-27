@@ -1,15 +1,15 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
-  import { twoDecimals, dollarsToCents } from '$lib/utils/moneyHelers';
+  import { twoDecimals, dollarsToCents, centsToDollars } from '$lib/utils/moneyHelers';
 
   export let lineItem: LineItem;
   export let canDelete: boolean = false;
   export let isRequired: boolean = false;
 
   let dispatch = createEventDispatcher();
-  let unitPrice: string = twoDecimals(lineItem.amount / lineItem.quantity);
-  let amount = twoDecimals(lineItem.amount);
+  let unitPrice: string = centsToDollars(lineItem.amount / lineItem.quantity);
+  let amount = centsToDollars(lineItem.amount);
 
   $: {
     amount = twoDecimals(lineItem.quantity * Number(unitPrice));

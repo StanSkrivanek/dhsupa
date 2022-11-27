@@ -10,7 +10,7 @@
 <!-- close modal on `escape` -->
 <svelte:window on:keydown={(e)=>{
   if (e.key === 'Escape') {
-    dispatch('closePanel');
+    dispatch('close');
   }
 }} />
 <Portal>

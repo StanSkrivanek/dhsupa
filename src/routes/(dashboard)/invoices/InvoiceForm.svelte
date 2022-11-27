@@ -31,6 +31,8 @@
   let isNewClient = false;
   let newClient: Partial<Client> = {};
 
+  const initDiscount = invoice.discount || 0;
+
   const addLineItem = () => {
     invoice.lineItems = [...(invoice.lineItems as []), { ...blankLineItem, id: uuidv4() }];
   };
@@ -57,8 +59,13 @@
     } else {
       // update invoice
       updateInvoice(invoice);
-      // closePanel();
+      closePanel();
     }
+  };
+
+  const UpdateDiscount = (event: CustomEvent) => {
+    console.log(event.detail.discount);
+    invoice.discount = event.detail.discount;
   };
 
   onMount(() => {
@@ -200,6 +207,7 @@
       on:addLineItem={addLineItem}
       on:removeLineItem={deleteLineItem}
       on:updateLineItem={UpdateLineItem}
+      on:updateDiscount={UpdateDiscount}
     />
   </div>
 
@@ -259,6 +267,6 @@
   {isModalShowing}
   on:close={() => {
     isModalShowing = false;
-    closePanel()
+    closePanel();
   }}
 />
