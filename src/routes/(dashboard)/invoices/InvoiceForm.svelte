@@ -8,9 +8,7 @@
   import { states } from '$lib/utils/states';
   import { addClient, clients, loadClients } from '$stores/ClientStore';
   import { today } from '$lib/utils/dateHelpers';
-  import { addInvoice } from '$stores/InvoiceStore';
-
-  export let closePanel: () => void = () => {};
+  import { addInvoice, updateInvoice } from '$stores/InvoiceStore';
 
   const blankLineItem = {
     id: uuidv4(),
@@ -20,12 +18,15 @@
     amount: 0
   };
 
-  // let lineItems: LineItem[] = [{ ...blankLineItem }];
-  let isNewClient = false;
-  let invoice: Invoice = {
+  export let closePanel: () => void = () => {};
+  export let invoice: Invoice = {
     client: {} as Client,
     lineItems: [{ ...blankLineItem }] as LineItem[]
   } as Invoice;
+  export let formState: 'create' | 'edit' = 'create';
+
+  // let lineItems: LineItem[] = [{ ...blankLineItem }];
+  let isNewClient = false;
 
   let newClient: Partial<Client> = {};
 
@@ -44,12 +45,18 @@
 
   const handleSubmit = () => {
     // console.log({ invoice, newClient });
-    addInvoice(invoice);
     if (isNewClient) {
       invoice.client = newClient as Client;
       addClient(newClient as Client);
-      closePanel();
     }
+    if (formState === 'create') {
+      addInvoice(invoice);
+    } else {
+      // update invoice
+      updateInvoice(invoice);
+    }
+
+    closePanel();
   };
 
   onMount(() => {
@@ -57,7 +64,9 @@
   });
 </script>
 
-<h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush ">Add an Invoice</h2>
+<h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush ">
+  {#if formState === 'create'} Add {:else} Edit {/if} an Invoice
+</h2>
 
 <form action="" class="grid grid-cols-6 gap-x-5" on:submit|preventDefault={handleSubmit}>
   <!-- client -->
@@ -212,15 +221,17 @@
   </div>
   <!-- buttons -->
   <!-- show delete btn only in EDIT mode -->
-  <div class="field col-span-2">
-    <Button
-      style="textOnlyDestructive"
-      label="Delete"
-      onButtonClick={() => {}}
-      isAnimated={false}
-      iconLeft={Trash}
-    />
-  </div>
+  {#if formState === 'edit'}
+    <div class="field col-span-2">
+      <Button
+        style="textOnlyDestructive"
+        label="Delete"
+        onButtonClick={() => {}}
+        isAnimated={false}
+        iconLeft={Trash}
+      />
+    </div>
+  {/if}
   <div class="field col-span-4 flex justify-end gap-x-4">
     <Button
       style="secondary"

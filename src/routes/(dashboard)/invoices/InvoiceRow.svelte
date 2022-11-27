@@ -11,17 +11,22 @@
   import Modal from '$lib/components/Modal.svelte';
   import Button from '$lib/components/Button.svelte';
   import { deleteInvoice } from '$stores/InvoiceStore';
-
+  import SlidePanel from '$lib/components/SlidePanel.svelte';
+  import InvoiceForm from './InvoiceForm.svelte';
   export let invoice: Invoice;
 
   let isAdditionalMenuShowing = false;
   let isOptionsDisabled = false;
   let isModalShowing = false;
+  let isInvoiceFormShowing = false;
+
   const toggleAdditionalMenu = () => {
     isAdditionalMenuShowing = !isAdditionalMenuShowing;
   };
   const handleEdit = () => {
-    console.log('edit');
+    // console.log('edit');
+    isInvoiceFormShowing = true;
+    isAdditionalMenuShowing = false;
   };
   const handleDelete = () => {
     isModalShowing = true;
@@ -68,8 +73,8 @@
     {#if isAdditionalMenuShowing}
       <AdditionalOptions
         options={[
-          { label: 'Send', icon: Send, onClick: handleSend, disabled: isOptionsDisabled },
           { label: 'Edit', icon: Edit, onClick: handleEdit, disabled: isOptionsDisabled },
+          { label: 'Send', icon: Send, onClick: handleSend, disabled: isOptionsDisabled },
           { label: 'Delete', icon: Trash, onClick: handleDelete, disabled: false }
         ]}
       />
@@ -79,7 +84,10 @@
 <Modal isVisible={isModalShowing} on:close={() => (isModalShowing = false)}>
   <div class="flex h-full min-h-[175px] flex-col items-center justify-between gap-6">
     <div class="text-center text-xl font-bold text-daisyBush">
-      Are you sure you want to delete invoice to <span class="text-scarlet">{invoice.client.name}</span> for
+      Are you sure you want to delete invoice to <span class="text-scarlet"
+        >{invoice.client.name}</span
+      >
+      for
       <span class="text-scarlet"> ${centsToDollars(sumLineItems(invoice.lineItems))}</span>?
     </div>
     <div class="flex gap-4">
@@ -103,6 +111,17 @@
     </div>
   </div>
 </Modal>
+<!-- slide Panel -->
+{#if isInvoiceFormShowing}
+  <!-- content here -->
+  <SlidePanel
+    on:closePanel={() => {
+      isInvoiceFormShowing = false;
+    }}
+  >
+    <InvoiceForm {invoice} formState="edit" closePanel={() => (isInvoiceFormShowing = false)} />
+  </SlidePanel>
+{/if}
 
 <style lang="postcss">
   .invoice-row {
