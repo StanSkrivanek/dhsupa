@@ -8,11 +8,9 @@
   import Trash from '$lib/components/Icon/Trash.svelte';
   import Send from '$lib/components/Icon/Send.svelte';
   import Edit from '$lib/components/Icon/Edit.svelte';
-  import Modal from '$lib/components/Modal.svelte';
-  import Button from '$lib/components/Button.svelte';
-  import { deleteInvoice } from '$stores/InvoiceStore';
   import SlidePanel from '$lib/components/SlidePanel.svelte';
   import InvoiceForm from './InvoiceForm.svelte';
+  import ConfirmDelete from './ConfirmDelete.svelte';
   export let invoice: Invoice;
 
   let isAdditionalMenuShowing = false;
@@ -81,36 +79,10 @@
     {/if}
   </div>
 </div>
-<Modal isVisible={isModalShowing} on:close={() => (isModalShowing = false)}>
-  <div class="flex h-full min-h-[175px] flex-col items-center justify-between gap-6">
-    <div class="text-center text-xl font-bold text-daisyBush">
-      Are you sure you want to delete invoice to <span class="text-scarlet"
-        >{invoice.client.name}</span
-      >
-      for
-      <span class="text-scarlet"> ${centsToDollars(sumLineItems(invoice.lineItems))}</span>?
-    </div>
-    <div class="flex gap-4">
-      <Button
-        label="cancel"
-        style="secondary"
-        onButtonClick={() => {
-          isModalShowing = false;
-        }}
-        isAnimated={false}
-      />
-      <Button
-        label="delete"
-        style="destructive"
-        onButtonClick={() => {
-          deleteInvoice(invoice);
-          isModalShowing = false;
-        }}
-        isAnimated={false}
-      />
-    </div>
-  </div>
-</Modal>
+
+<!-- Modal -->
+<ConfirmDelete {invoice} {isModalShowing} on:close={() => (isModalShowing = false)} />
+
 <!-- slide Panel -->
 {#if isInvoiceFormShowing}
   <!-- content here -->

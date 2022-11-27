@@ -48,15 +48,16 @@
     if (isNewClient) {
       invoice.client = newClient as Client;
       addClient(newClient as Client);
+      closePanel();
     }
     if (formState === 'create') {
       addInvoice(invoice);
+      closePanel();
     } else {
       // update invoice
       updateInvoice(invoice);
+      closePanel();
     }
-
-    closePanel();
   };
 
   onMount(() => {
