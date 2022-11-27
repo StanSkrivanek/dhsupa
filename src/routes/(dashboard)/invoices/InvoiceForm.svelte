@@ -9,6 +9,7 @@
   import { addClient, clients, loadClients } from '$stores/ClientStore';
   import { today } from '$lib/utils/dateHelpers';
   import { addInvoice, updateInvoice } from '$stores/InvoiceStore';
+  import ConfirmDelete from './ConfirmDelete.svelte';
 
   const blankLineItem = {
     id: uuidv4(),
@@ -24,10 +25,10 @@
     lineItems: [{ ...blankLineItem }] as LineItem[]
   } as Invoice;
   export let formState: 'create' | 'edit' = 'create';
-
   // let lineItems: LineItem[] = [{ ...blankLineItem }];
-  let isNewClient = false;
 
+  let isModalShowing = false;
+  let isNewClient = false;
   let newClient: Partial<Client> = {};
 
   const addLineItem = () => {
@@ -52,11 +53,11 @@
     }
     if (formState === 'create') {
       addInvoice(invoice);
-      closePanel();
+      // closePanel();
     } else {
       // update invoice
       updateInvoice(invoice);
-      closePanel();
+      // closePanel();
     }
   };
 
@@ -227,7 +228,9 @@
       <Button
         style="textOnlyDestructive"
         label="Delete"
-        onButtonClick={() => {}}
+        onButtonClick={() => {
+          isModalShowing = true;
+        }}
         isAnimated={false}
         iconLeft={Trash}
       />
@@ -250,3 +253,12 @@
     >
   </div>
 </form>
+
+<ConfirmDelete
+  {invoice}
+  {isModalShowing}
+  on:close={() => {
+    isModalShowing = false;
+    closePanel()
+  }}
+/>
