@@ -64,7 +64,7 @@
   };
 
   const UpdateDiscount = (event: CustomEvent) => {
-    console.log(event.detail.discount);
+    // console.log(event.detail.discount);
     invoice.discount = event.detail.discount;
   };
 
@@ -79,11 +79,12 @@
 
 <form action="" class="grid grid-cols-6 gap-x-5" on:submit|preventDefault={handleSubmit}>
   <!-- client -->
-  <div class=" field col-span-4">
+  <div class=" field col-span-6 md:col-span-4">
     {#if !isNewClient}
       <label for="client">Client</label>
-      <div class="flex items-end gap-x-4">
+      <div class="flex flex-wrap items-center  gap-x-2 sm:flex-nowrap md:gap-x-4">
         <select
+          class="mb-2 sm:mb-0"
           name="client"
           id="client"
           required={!isNewClient}
@@ -100,7 +101,7 @@
           {/each}
         </select>
 
-        <div class=" text-base font-bold leading-[3.5rem] text-monsoon">or</div>
+        <div class="font-bold text-monsoon"><span>or</span></div>
         <Button
           label="add client"
           onButtonClick={() => {
@@ -115,8 +116,9 @@
     {:else}
       <!-- show other form fields-->
       <label for="newclient">New Client</label>
-      <div class="flex items-end gap-x-4">
+      <div class="flex flex-wrap items-center  gap-x-2 sm:flex-nowrap md:gap-x-4">
         <input
+          class="mb-2 sm:mb-0"
           type="text"
           name="newclient"
           id="newclient"
@@ -124,7 +126,7 @@
           required={isNewClient}
           bind:value={newClient.name}
         />
-        <div class=" text-base font-bold leading-[3.5rem] text-monsoon">or</div>
+        <div class=" font-bold text-monsoon"><span>or</span></div>
         <Button
           label="Existing Client"
           onButtonClick={() => {
@@ -140,7 +142,7 @@
 
   <!-- invoice Number -->
   <!-- TODO: set number to auto increase with each new invoice -->
-  <div class="field col-span-2 ">
+  <div class="field col-span-6 md:col-span-2 row-start-1 md:row-start-auto">
     <label for="invoiceNr">Invoice Nr</label>
     <input type="number" name="invoiceNr" id="" required bind:value={invoice.invoiceNumber} />
   </div>
@@ -182,13 +184,13 @@
     </div>
   {/if}
   <!-- dueDate -->
-  <div class="field col-span-2 ">
+  <div class="field col-span-3 sm:col-span-2 ">
     <label for="dueDate">Due Date</label>
     <input type="date" name="dueDate" id="" min={today} required bind:value={invoice.dueDate} />
   </div>
 
   <!-- issue date -->
-  <div class="field col-span-2 col-start-5">
+  <div class="field col-span-3 md:col-span-2 md:col-start-5">
     <label for="issueDate">Issue Date</label>
     <input type="date" name="issueDate" id="" min={today} bind:value={invoice.issueDate} />
   </div>

@@ -3,7 +3,7 @@
   import LineItemRow from './LineItemRow.svelte';
   import Button from '$lib/components/Button.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';
-  import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelers';
+  import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelpers';
   
   let dispatch = createEventDispatcher();
   export let lineItems: LineItem[] | undefined = undefined;

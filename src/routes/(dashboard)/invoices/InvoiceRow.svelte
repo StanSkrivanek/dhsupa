@@ -4,7 +4,7 @@
   import ThreeDots from '$lib/components/Icon/ThreeDots.svelte';
   import Tag from '$lib/components/Tag.svelte';
   import { convertDate, isLate } from '$lib/utils/dateHelpers';
-  import { centsToDollars, invoiceTotal } from '$lib/utils/moneyHelers';
+  import { centsToDollars, invoiceTotal } from '$lib/utils/moneyHelpers';
   import Trash from '$lib/components/Icon/Trash.svelte';
   import Send from '$lib/components/Icon/Send.svelte';
   import Edit from '$lib/components/Icon/Edit.svelte';
@@ -60,7 +60,7 @@
   <div class="amount text-right font-mono text-sm lg:text-lg">
     ${centsToDollars(invoiceTotal(invoice.lineItems, invoice.discount))}
   </div>
-  <div class=" viewBtn hidden text-sm lg:block ">
+  <div class="viewBtn hidden text-sm lg:block ">
     <a href="/" class="center text-pastelPurple hover:text-daisyBush"><Eye /></a>
   </div>
   <div class="moreBtn relative hidden text-sm lg:block">

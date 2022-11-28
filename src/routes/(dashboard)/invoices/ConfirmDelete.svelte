@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelers';
+  import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
   import { deleteInvoice } from '$stores/InvoiceStore';
   import Modal from '$lib/components/Modal.svelte';
   import Button from '$lib/components/Button.svelte';

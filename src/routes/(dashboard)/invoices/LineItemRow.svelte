@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
-  import { twoDecimals, dollarsToCents, centsToDollars } from '$lib/utils/moneyHelers';
+  import { twoDecimals, dollarsToCents, centsToDollars } from '$lib/utils/moneyHelpers';
 
   export let lineItem: LineItem;
   export let canDelete: boolean = false;

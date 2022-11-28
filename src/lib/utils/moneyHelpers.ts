@@ -68,7 +68,6 @@ export const invoiceTotal = (
   lineItems: LineItem[] | undefined,
   discount: number | undefined
 ): number => {
-  console.log('lineItems', lineItems, 'discount', discount);
   const lineItemsSum = sumLineItems(lineItems);
   if (discount) {
     const invoiceDiscount = lineItemsSum * (discount / 100);
