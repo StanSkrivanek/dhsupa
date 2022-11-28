@@ -50,7 +50,7 @@
 
 <!-- sum -->
 <div class="invoice-line-item">
-  <div class="col-span-2">
+  <div class="col-span-1 sm:col-span-2">
     <Button
       label="add line"
       style="textOnly"
@@ -65,7 +65,7 @@
 </div>
 
 <div class="invoice-line-item">
-  <div class="col-span-2 py-4 text-right font-bold text-monsoon">Discount</div>
+  <div class="col-span-1 sm:col-span-2 py-4 text-right font-bold text-monsoon">Discount</div>
   <div class="relative">
     <input
       class="line-item h-10 w-full border-b-2 border-dashed border-stone-300 pr-4 text-right focus:border-solid focus:border-lavenderIndigo focus:outline-none"
@@ -84,13 +84,13 @@
 </div>
 
 <div class="invoice-line-item">
-  <div class="col-span-6">
+  <div class="col-span-3 sm:col-span-6">
     <CircledAmount label="Total:" amount={`$${centsToDollars(total)}`} />
   </div>
 </div>
 
 <style lang="postcss">
   .table-header {
-    @apply text-sm font-bold text-daisyBush;
+    @apply hidden sm:block text-sm font-bold text-daisyBush;
   }
 </style>

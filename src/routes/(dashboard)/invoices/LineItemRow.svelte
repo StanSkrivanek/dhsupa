@@ -18,8 +18,9 @@
 </script>
 
 <!-- Structure -->
-<div class="invoice-line-item border-b-2 border-fog py-2">
-  <div>
+<div class="invoice-line-item border-b-2 border-fog py-4 sm:py-2">
+  <div class="description">
+    <label for="description" class="line-item-label">Description</label>
     <input
       class="line-item"
       type="text"
@@ -28,9 +29,10 @@
       required={isRequired}
     />
   </div>
-  <div>
+  <div class="unitPrice">
+    <label for="unitPrice" class="line-item-label">Unit Price</label>
     <input
-      class="line-item text-right"
+      class="line-item sm:text-right"
       type="number"
       name="unitPrice"
       step="0.01"
@@ -43,10 +45,11 @@
       required={isRequired}
     />
   </div>
-  <div>
+  <div class="quantity">
     <!-- TODO: quantity 0 is considered as init value and required is fulfilled on form load. Form can be submitted with Qty 0 FIX: make quantity to be empty on form load-->
+    <label for="quantity" class="line-item-label">Qty</label>
     <input
-      class="line-item text-right"
+      class="line-item sm:text-right"
       type="number"
       name="quantity"
       min="0"
@@ -57,9 +60,10 @@
       required={isRequired}
     />
   </div>
-  <div>
+  <div class="amount">
+    <label for="amount" class="line-item-label">Amount</label>
     <input
-      class="line-item text-right"
+      class="line-item sm:text-right"
       type="number"
       name="amount"
       step="0.01"
@@ -68,7 +72,7 @@
       disabled
     />
   </div>
-  <div>
+  <div class="trash">
     {#if canDelete}
       <button
         class="center h-10 w-10 text-pastelPurple hover:text-lavenderIndigo"
@@ -99,5 +103,8 @@
   input[type='text']:disabled,
   input[type='number']:disabled {
     @apply border-b-0 bg-transparent px-0;
+  }
+  .line-item-label {
+    @apply block sm:hidden text-stone-500 font-sansSerif text-sm font-bold;
   }
 </style>
