@@ -19,18 +19,14 @@ export const updateInvoice = (invoiceToUpdate: Invoice) => {
   );
   return invoiceToUpdate;
 };
-// export const updateInvoice = (invoiceToUpdate: Invoice) => {
-//   invoices.update((prev: Invoice[]) => {
-//     const index = prev.findIndex((invoice) => invoice.id === invoiceToUpdate.id);
-//     prev[index] = invoiceToUpdate;
-//     return prev;
-//   });
-//   return invoiceToUpdate;
-// };
 
 export const deleteInvoice = async (invoiceToDelete: Invoice) => {
   invoices.update((prev: Invoice[]) =>
     prev.filter((cur: Invoice) => cur.id !== invoiceToDelete.id)
   );
   return invoiceToDelete;
+};
+
+export const getInvoiceById = (id: string) => {
+  return data.invoices.find((invoice: Invoice) => invoice.id === id);
 };

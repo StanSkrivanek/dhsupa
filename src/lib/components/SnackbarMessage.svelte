@@ -8,10 +8,12 @@
     duration: 3000,
     easing: (t) => t
   });
+
   onMount(async () => {
     await progress.set(0);
     snackbar.remove();
   });
+  
 </script>
 
 <div class="whitespace-nowrap">
