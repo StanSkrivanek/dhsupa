@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { invoices, loadInvoices } from '$stores/InvoiceStore';
+  import { invoices, loadInvoices } from '$lib/stores/InvoiceStore';
   import { sumInvoices, centsToDollars } from '$lib/utils/moneyHelpers';
   import Search from '$lib/components/Search.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';

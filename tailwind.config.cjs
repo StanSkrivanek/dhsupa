@@ -54,6 +54,7 @@ module.exports = {
         64: '16rem'
       },
       zIndex: {
+        toaster: 1000,
         modal: 999,
         modalOverlay: 998,
         slidePanel: 997,

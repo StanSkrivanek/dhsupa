@@ -6,10 +6,11 @@
   import Button from '$lib/components/Button.svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
   import { states } from '$lib/utils/states';
-  import { addClient, clients, loadClients } from '$stores/ClientStore';
+  import { addClient, clients, loadClients } from '$lib/stores/ClientStore';
   import { today } from '$lib/utils/dateHelpers';
-  import { addInvoice, updateInvoice } from '$stores/InvoiceStore';
+  import { addInvoice, updateInvoice } from '$lib/stores/InvoiceStore';
   import ConfirmDelete from './ConfirmDelete.svelte';
+  import { snackbar } from '$lib/stores/SnackbarStore';
 
   const blankLineItem = {
     id: uuidv4(),
@@ -55,12 +56,14 @@
     }
     if (formState === 'create') {
       addInvoice(invoice);
+      snackbar.send({ message: 'Invoice was created', type: 'success' });
       // closePanel();
     } else {
       // update invoice
       updateInvoice(invoice);
-      closePanel();
+      snackbar.send({ message: 'Invoice was updated', type: 'success' });
     }
+    closePanel();
   };
 
   const UpdateDiscount = (event: CustomEvent) => {
@@ -142,7 +145,7 @@
 
   <!-- invoice Number -->
   <!-- TODO: set number to auto increase with each new invoice -->
-  <div class="field col-span-6 md:col-span-2 row-start-1 md:row-start-auto">
+  <div class="field col-span-6 row-start-1 md:col-span-2 md:row-start-auto">
     <label for="invoiceNr">Invoice Nr</label>
     <input type="number" name="invoiceNr" id="" required bind:value={invoice.invoiceNumber} />
   </div>

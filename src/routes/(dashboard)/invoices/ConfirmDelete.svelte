@@ -1,15 +1,14 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { snackbar } from '$lib/stores/SnackbarStore';
   import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
-  import { deleteInvoice } from '$stores/InvoiceStore';
+  import { deleteInvoice } from '$lib/stores/InvoiceStore';
   import Modal from '$lib/components/Modal.svelte';
   import Button from '$lib/components/Button.svelte';
   export let invoice: Invoice;
   export let isModalShowing = false;
 
   let dispatch = createEventDispatcher();
-
-
 </script>
 
 <Modal isVisible={isModalShowing} on:close>
@@ -36,6 +35,7 @@
         onButtonClick={() => {
           deleteInvoice(invoice);
           dispatch('close');
+          snackbar.send({ message: 'Invoice was deleted', type: 'success' });
         }}
         isAnimated={false}
       />
