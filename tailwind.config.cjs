@@ -17,6 +17,7 @@ module.exports = {
       boxShadow: {
         colored: '0 7px 16px rgba(127, 91, 220, 0.002)',
         coloredHover: '0 16px 25px rgba(127, 91, 220, 0.3)',
+        invoice: '-4px 0 44px rgba(0, 0, 0, 0.25)',
         slidePanel: '-4px 0px 44px rgba(0, 0, 0, 0.25)',
         tableRow: '0px 0px 16px rgba(0, 0, 0, 0.16)',
         '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
