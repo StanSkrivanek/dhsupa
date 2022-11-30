@@ -228,3 +228,8 @@ now run the following command to start dev server:
 ```bash
 pnpm dev
 ```
+
+### Additional Libraries
+
+[date-fns](https://www.npmjs.com/package/date-fns)
+[svelte-markdown](https://www.npmjs.com/package/svelte-markdown)
