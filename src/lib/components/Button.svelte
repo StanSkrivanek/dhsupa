@@ -13,13 +13,13 @@
   export let onButtonClick: () => void;
   export let iconLeft: (new (...args: any[]) => SvelteComponent) | null = null;
   export let iconRight: (new (...args: any[]) => SvelteComponent) | null = null;
-  // export let className: string;
+  export let className: string = '';
   // export let type: string = 'button';
   // export let disabled: boolean = false;
 </script>
 
 <button
-  class="button"
+  class={`button ${className}`}
   class:primary={style === 'primary'}
   class:secondary={style === 'secondary'}
   class:destructive={style === 'destructive'}

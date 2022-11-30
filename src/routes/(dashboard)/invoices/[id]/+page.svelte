@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
   import { loadSettings, settings } from '$lib/stores/SettingsStore';
   import { convertDate } from '$lib/utils/dateHelpers';
   import Button from '$lib/components/Button.svelte';
@@ -10,18 +11,23 @@
   // console.log("DATA",data);
 
   let invoice = data.invoice;
+  let copyLinkLabel = 'Copy Link';
 
   const printInvoice = () => {
-    // window.print();
+    window.print();
   };
   const copyLink = () => {
-    // window.print();
+    navigator.clipboard.writeText($page.url.href);
+    copyLinkLabel = 'Copied!';
+    setTimeout(() => {
+      copyLinkLabel = 'Copy Link';
+    }, 1250);
   };
   const payInvoice = () => {
-    // window.print();
+    //
   };
   const sendInvoice = () => {
-    // window.print();
+    //
   };
 
   onMount(() => {
@@ -40,7 +46,7 @@
       isAnimated={false}
       onButtonClick={printInvoice}
     />
-    <Button height="short" label="Copy Link" isAnimated={false} onButtonClick={copyLink} />
+    <Button height="short" label={copyLinkLabel} isAnimated={false} onButtonClick={copyLink} className="min-w-[168px] justify-center" />
     <Button height="short" label="Send Invoice" isAnimated={false} onButtonClick={sendInvoice} />
     <Button height="short" label="Pay Invoice" isAnimated={false} onButtonClick={payInvoice} />
   </div>
@@ -113,13 +119,13 @@
   {#if invoice.notes}
     <div class="col-span-6">
       <div class="label">Notes</div>
-      <SvelteMarkdown source={invoice.notes}/>
+      <SvelteMarkdown source={invoice.notes} />
     </div>
   {/if}
   {#if invoice.terms}
     <div class="col-span-6">
       <div class="label">Terms and conditions</div>
-     <SvelteMarkdown source={invoice.terms}/>
+      <SvelteMarkdown source={invoice.terms} />
     </div>
   {/if}
 </div>
