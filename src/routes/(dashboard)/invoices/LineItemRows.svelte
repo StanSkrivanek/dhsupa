@@ -4,11 +4,12 @@
   import Button from '$lib/components/Button.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';
   import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelpers';
-  
-  let dispatch = createEventDispatcher();
+
   export let lineItems: LineItem[] | undefined = undefined;
   export let discount: number = 0;
-
+  export let isEditable: boolean = true;
+  
+  let dispatch = createEventDispatcher();
   let subtotal: number = 0;
   let discountedAmount: number = 0;
   let total: number = 0;
@@ -44,6 +45,7 @@
       canDelete={idx > 0}
       on:updateLineItem
       isRequired={idx === 0}
+      {isEditable}
     />
   {/each}
 {/if}
@@ -51,6 +53,7 @@
 <!-- sum -->
 <div class="invoice-line-item">
   <div class="col-span-1 sm:col-span-2">
+    {#if isEditable}
     <Button
       label="add line"
       style="textOnly"
@@ -59,13 +62,14 @@
       }}
       isAnimated={false}
     />
+    {/if}
   </div>
   <div class="py-4 text-right font-bold text-monsoon ">Subtotal</div>
   <div class="py-4 text-right font-mono">${centsToDollars(subtotal)}</div>
 </div>
 
 <div class="invoice-line-item">
-  <div class="col-span-1 sm:col-span-2 py-4 text-right font-bold text-monsoon">Discount</div>
+  <div class="col-span-1 py-4 text-right font-bold text-monsoon sm:col-span-2">Discount</div>
   <div class="relative">
     <input
       class="line-item h-10 w-full border-b-2 border-dashed border-stone-300 pr-4 text-right focus:border-solid focus:border-lavenderIndigo focus:outline-none"
@@ -73,14 +77,17 @@
       name="discount"
       min="0"
       max="100"
+      disabled={!isEditable}
       bind:value={discount}
       on:change={() => {
-        dispatch('updateDiscount', {discount});
+        dispatch('updateDiscount', { discount });
       }}
     />
     <span class="text-mono absolute right-0 top-2">%</span>
   </div>
-  <div class="py-4 text-right font-mono">${discountedAmount ? centsToDollars(discountedAmount): "0.00"}</div>
+  <div class="py-4 text-right font-mono">
+    ${discountedAmount ? centsToDollars(discountedAmount) : '0.00'}
+  </div>
 </div>
 
 <div class="invoice-line-item">
@@ -91,6 +98,6 @@
 
 <style lang="postcss">
   .table-header {
-    @apply hidden sm:block text-sm font-bold text-daisyBush;
+    @apply hidden text-sm font-bold text-daisyBush sm:block;
   }
 </style>

@@ -1,10 +1,12 @@
 <script lang="ts">
   import Button from '$lib/components/Button.svelte';
   import { convertDate } from '$lib/utils/dateHelpers';
+  import LineItemRows from '../LineItemRows.svelte';
   export let data: { invoice: Invoice };
   // console.log("DATA",data);
-
   let invoice = data.invoice;
+
+
   const printInvoice = () => {
     // window.print();
   };
@@ -87,7 +89,9 @@
   </div>
 
   <!-- Line Items -->
-  <div class="col-span-6">LINE ITEMS</div>
+  <div class="col-span-6">
+    <LineItemRows lineItems={invoice.lineItems} isEditable={false} discount={invoice.discount } />
+  </div>
 
   {#if invoice.notes}
     <div class="col-span-6">

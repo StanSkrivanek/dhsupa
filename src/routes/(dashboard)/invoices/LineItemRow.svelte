@@ -6,7 +6,7 @@
   export let lineItem: LineItem;
   export let canDelete: boolean = false;
   export let isRequired: boolean = false;
-
+  export let isEditable: boolean = true;
   let dispatch = createEventDispatcher();
   let unitPrice: string = centsToDollars(lineItem.amount / lineItem.quantity);
   let amount = centsToDollars(lineItem.amount);
@@ -27,6 +27,7 @@
       name="description"
       bind:value={lineItem.description}
       required={isRequired}
+      disabled={!isEditable}
     />
   </div>
   <div class="unitPrice">
@@ -43,6 +44,7 @@
         dispatch('updateLineItem', lineItem);
       }}
       required={isRequired}
+        disabled={!isEditable}
     />
   </div>
   <div class="quantity">
@@ -58,6 +60,7 @@
         dispatch('updateLineItem', lineItem);
       }}
       required={isRequired}
+        disabled={!isEditable}
     />
   </div>
   <div class="amount">
@@ -73,7 +76,7 @@
     />
   </div>
   <div class="trash">
-    {#if canDelete}
+    {#if canDelete && isEditable}
       <button
         class="center h-10 w-10 text-pastelPurple hover:text-lavenderIndigo"
         type="button"
