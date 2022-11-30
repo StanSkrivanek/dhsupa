@@ -1,11 +1,14 @@
 <script lang="ts">
-  import Button from '$lib/components/Button.svelte';
+  import { onMount } from 'svelte';
+  import {loadSettings, settings } from '$lib/stores/SettingsStore';
   import { convertDate } from '$lib/utils/dateHelpers';
+  import Button from '$lib/components/Button.svelte';
   import LineItemRows from '../LineItemRows.svelte';
+
   export let data: { invoice: Invoice };
   // console.log("DATA",data);
-  let invoice = data.invoice;
 
+  let invoice = data.invoice;
 
   const printInvoice = () => {
     // window.print();
@@ -19,6 +22,10 @@
   const sendInvoice = () => {
     // window.print();
   };
+
+  onMount(() => {
+    loadSettings();
+  });
 </script>
 
 <!-- Header -->
@@ -47,11 +54,18 @@
   <div class="col-span-2 col-start-5 pt-4">
     <div class="label">From</div>
     <p>
-      <span>FineDiv Studio</span><br />
-      <span>Address</span><br />
-      <span>City, State, Zip</span><br />
-      <span>Phone</span><br />
-      <span>finedivstudio@gmail.com</span><br />
+      {#if $settings}
+        <span>{$settings.Name}</span><br />
+        <span>{$settings.Street}</span><br />
+        <span>{$settings.City}</span><br />
+        <span>{$settings.State}</span><br />
+        <!-- <span>{$settings.Zip}</span><br /> -->
+        <!-- <span>{$settings.Email}</span><br /> -->
+        {:else}
+        <div class="center min-h-[68px] rounded bg-gallery">
+          <a class="text-stone-600 underline hover:no-underline " href="#">Add your contact Information</a>
+        </div>
+        {/if}
     </p>
   </div>
   <div class="col-span-3">
@@ -90,7 +104,7 @@
 
   <!-- Line Items -->
   <div class="col-span-6">
-    <LineItemRows lineItems={invoice.lineItems} isEditable={false} discount={invoice.discount } />
+    <LineItemRows lineItems={invoice.lineItems} isEditable={false} discount={invoice.discount} />
   </div>
 
   {#if invoice.notes}

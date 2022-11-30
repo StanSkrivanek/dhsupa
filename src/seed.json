@@ -183,5 +183,13 @@
       "state": "TN",
       "zip": "87654"
     }
-  ]
+  ],
+  "settings": {
+    "Name": "Finediv Studio",
+    "Email": "finedivstudio@gmail.com",
+    "Street": "Ballincollig",
+    "City": "Cork",
+    "State": "Ireland",
+    "Zip": "T12 P345"
+  }
 }
