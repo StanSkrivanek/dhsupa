@@ -1,6 +1,10 @@
 <script lang="ts">
   import Button from '$lib/components/Button.svelte';
+  import { convertDate } from '$lib/utils/dateHelpers';
+  export let data: { invoice: Invoice };
+  // console.log("DATA",data);
 
+  let invoice = data.invoice;
   const printInvoice = () => {
     // window.print();
   };
@@ -41,70 +45,70 @@
   <div class="col-span-2 col-start-5 pt-4">
     <div class="label">From</div>
     <p>
-      <span>Company Name</span><br />
+      <span>FineDiv Studio</span><br />
       <span>Address</span><br />
       <span>City, State, Zip</span><br />
       <span>Phone</span><br />
-      <span>Email</span><br />
+      <span>finedivstudio@gmail.com</span><br />
     </p>
   </div>
   <div class="col-span-3">
     <div class="label">Bill To</div>
     <p>
-      <span>Company Name</span><br />
-      <span>Address</span><br />
-      <span>City, State, Zip</span><br />
-      <span>Phone</span><br />
-      <span>Email</span><br />
+      <span>{invoice.client.name}</span><br />
+      <span>{invoice.client.street}</span><br />
+      <span>{invoice.client.city}, {invoice.client.state} {invoice.client.zip}</span><br />
+      <span>{invoice.client.email}</span>
     </p>
   </div>
   <div class="col-span-2 col-start-5 ">
     <div class="label">Invoice ID</div>
     <p>
-      Invoice #<span>123456</span><br />
+      Invoice #<span>{invoice.invoiceNumber}</span><br />
     </p>
   </div>
   <div class="col-span-3">
-    <div class="label">Issue Date</div>
-    <p>
-      <span>12/12/2020</span><br />
-    </p>
-  </div>
-  <div class="col-span-2 col-start-5 ">
     <div class="label">Due Date</div>
     <p>
-      <span>12/30/2020</span><br />
+      <span>{convertDate(invoice.dueDate)}</span><br />
+    </p>
+  </div>
+  <div class="col-span-2 col-start-5">
+    <div class="label">Issue Date</div>
+    <p>
+      <span>{convertDate(invoice.issueDate)}</span><br />
     </p>
   </div>
   <div class="subject col-span-6">
     <div class="label">Subject</div>
     <p>
-      <span>Website</span><br />
+      <span>{invoice.subject}</span><br />
     </p>
   </div>
 
   <!-- Line Items -->
   <div class="col-span-6">LINE ITEMS</div>
-  <div class="col-span-6">
-    <div class="label">Notes</div>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium nulla alias blanditiis,
-      possimus facilis tempore, dolorem perspiciatis, tenetur sit in beatae officiis inventore at
-      cupiditate ipsa cum enim aliquam. Ut.
-    </p>
-  </div>
-  <div class="col-span-6">
-    <div class="label">Terms and conditions</div>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium nulla alias blanditiis,
-      possimus facilis tempore, dolorem perspiciatis, tenetur sit in beatae officiis inventore at
-      cupiditate ipsa cum enim aliquam. Ut.
-    </p>
-  </div>
+
+  {#if invoice.notes}
+    <div class="col-span-6">
+      <div class="label">Notes</div>
+      <p>
+        {invoice.notes}
+      </p>
+    </div>
+  {/if}
+  {#if invoice.terms}
+    <div class="col-span-6">
+      <div class="label">Terms and conditions</div>
+      <p>
+        {invoice.terms}
+      </p>
+    </div>
+  {/if}
 </div>
 
 <style lang="postcss">
-  .label{
-    @apply font-black text-monsoon
+  .label {
+    @apply font-black text-monsoon;
   }
 </style>
