@@ -212,9 +212,9 @@
       on:addLineItem={addLineItem}
       on:removeLineItem={deleteLineItem}
       on:updateLineItem={UpdateLineItem}
-      on:updateDiscount={UpdateDiscount}
     />
   </div>
+  <!-- on:updateDiscount={UpdateDiscount} -->
 
   <!-- notes -->
   <div class="field col-span-6 ">
