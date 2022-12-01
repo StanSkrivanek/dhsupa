@@ -20,6 +20,15 @@ export const centsToDollars = (cents: number): string => {
 };
 
 /**
+ * Converting Cents to Dollars, without Commas
+ * @param {number} cents
+ * @returns {string}
+ */
+export const centsToDollarsWithoutCommas = (cents: number): string => {
+  const dollars = cents / 100;
+  return twoDecimals(dollars);
+}
+/**
  * takes a number and returns a string with two decimal places
  * @param {number} num
  * @returns {string}

@@ -16,7 +16,7 @@
   }}
 />
 
-<div class="h-full min-h-screen w-screen bg-whisper pt-12 pb-32">
+<div class="h-full min-h-screen w-screen bg-whisper pt-16 lg:pt-12 pb-32">
   <main class="mx-auto min-h-screen max-w-screen-lg">
     <a href={previousPage ? previousPage : '/invoices'} class="fixed left-7 top-7 text-pastelPurple"
       ><ArrowBack /></a

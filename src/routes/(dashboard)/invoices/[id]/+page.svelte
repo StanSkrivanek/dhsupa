@@ -36,9 +36,9 @@
 </script>
 
 <!-- Header -->
-<div class=" fixed z-0 mb-16 flex w-full max-w-screen-lg justify-between">
+<div class="fixed z-0 mb-16 flex flex-col md:flex-row gap-y-4 w-full max-w-screen-lg justify-between px-4 lg:px-0">
   <h1 class="text-3xl font-bold text-daisyBush ">Invoice</h1>
-  <div class="flex items-center gap-4">
+  <div class="flex flex-wrap items-center sm:gap-4 gap-2 sm:flex-nowrap">
     <Button
       height="short"
       label="Print"
@@ -46,19 +46,25 @@
       isAnimated={false}
       onButtonClick={printInvoice}
     />
-    <Button height="short" label={copyLinkLabel} isAnimated={false} onButtonClick={copyLink} className="min-w-[168px] justify-center" />
+    <Button
+      height="short"
+      label={copyLinkLabel}
+      isAnimated={false}
+      onButtonClick={copyLink}
+      className="sm:min-w-[168px] min-w-[100px] justify-center"
+    />
     <Button height="short" label="Send Invoice" isAnimated={false} onButtonClick={sendInvoice} />
     <Button height="short" label="Pay Invoice" isAnimated={false} onButtonClick={payInvoice} />
   </div>
 </div>
 <!-- Content -->
 <div
-  class="relative top-32 z-10 grid grid-cols-6 gap-x-4 gap-y-8 bg-white py-16 px-32 shadow-invoice"
+  class="relative top-32 z-10 grid grid-cols-6 gap-x-4 gap-y-8 bg-white md:py-16 md:px-32 shadow-invoice p-4 "
 >
-  <div class="col-span-3">
+  <div class="col-span-6 sm:col-span-3">
     <img src="/images/logo.png" srcset="/images/logo@2x.png 2x, /images/logo.png 1x" alt="logo" />
   </div>
-  <div class="col-span-2 col-start-5 pt-4">
+  <div class="sm:col-span-2 sm:col-start-5 col-span-6 pt-4">
     <div class="label">From</div>
     <p>
       {#if $settings}
@@ -77,7 +83,7 @@
       {/if}
     </p>
   </div>
-  <div class="col-span-3">
+  <div class="sm:col-span-3 col-span-6">
     <div class="label">Bill To</div>
     <p>
       <span>{invoice.client.name}</span><br />
@@ -86,7 +92,7 @@
       <span>{invoice.client.email}</span>
     </p>
   </div>
-  <div class="col-span-2 col-start-5 ">
+  <div class="sm:col-span-2 sm:col-start-5 col-span-6">
     <div class="label">Invoice ID</div>
     <p>
       Invoice #<span>{invoice.invoiceNumber}</span><br />
@@ -98,7 +104,7 @@
       <span>{convertDate(invoice.dueDate)}</span><br />
     </p>
   </div>
-  <div class="col-span-2 col-start-5">
+  <div class="col-span-3 sm:col-span-2 sm:col-start-5">
     <div class="label">Issue Date</div>
     <p>
       <span>{convertDate(invoice.issueDate)}</span><br />

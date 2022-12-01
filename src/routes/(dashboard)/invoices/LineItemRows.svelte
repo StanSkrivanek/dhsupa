@@ -3,7 +3,7 @@
   import LineItemRow from './LineItemRow.svelte';
   import Button from '$lib/components/Button.svelte';
   import CircledAmount from '$lib/components/CircledAmount.svelte';
-  import { centsToDollars, sumLineItems, twoDecimals } from '$lib/utils/moneyHelpers';
+  import { centsToDollars, sumLineItems } from '$lib/utils/moneyHelpers';
 
   export let lineItems: LineItem[] | undefined = undefined;
   export let discount: number = 0;
@@ -14,7 +14,7 @@
   let discountedAmount: number = 0;
   let total: number = 0;
 
-  // $: console.log('sub', subtotal, 'disc', discountedAmount, 'tot', total);
+  $: console.log('sub', subtotal, 'disc', discountedAmount, 'tot', total);
 
   // subtotal in cents
   $: if (sumLineItems(lineItems) > 0) {
