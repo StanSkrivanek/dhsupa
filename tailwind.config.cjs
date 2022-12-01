@@ -66,7 +66,8 @@ module.exports = {
       backgroundImage: {
         circle: "url('/images/svg/hand-circle.svg')",
         chevronDown: "url('/images/svg/chevron--down.svg')",
-        thankYou: "url('/images/svg/thankyou.svg')"
+        thankYou: "url('/images/svg/thankyou.svg')",
+        error_404: "url('/images/svg/bgError.svg')",
       },
       backgroundPosition: {
         'right-center': '97% center'
