@@ -5,6 +5,7 @@
   import Button from '$lib/components/Button.svelte';
   import ClientRowHeader from './ClientRowHeader.svelte';
   import ClientRow from './ClientRow.svelte';
+    import BlankState from '../invoices/BlankState.svelte';
 
   let isClientFormShowing: boolean = false;
   onMount(() => {
@@ -41,7 +42,8 @@
   {#if $clients === null}
     loading ...
   {:else if $clients.length <= 0}
-    <div class="text-center text-gray-500">No clients yet</div>
+    <!-- <div class="text-center text-gray-500">No clients yet</div> -->
+    <BlankState/>
   {:else}
     <!-- client header row -->
     <ClientRowHeader />
