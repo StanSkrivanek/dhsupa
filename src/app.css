@@ -55,12 +55,15 @@
 }
 
 @layer components {
+
   .invoice-table {
     @apply mb-3 grid w-full grid-cols-invoiceTable gap-x-4 px-4 lg:px-6;
   }
+
   .field {
     @apply mb-6;
   }
+
   .invoice-line-item {
     @apply relative grid gap-4 sm:grid-cols-invoiceLineItem;
     grid-template-areas:
@@ -88,6 +91,11 @@
   .invoice-line-item .trash {
     @apply absolute right-0 top-0 sm:relative;
     grid-area: trash;
+  }
+
+
+  .client-table{
+    @apply grid w-full grid-cols-clientTableMobile lg:grid-cols-clientTable gap-x-4 mb-4 lg:mb-6 px-4 lg:px-6;
   }
 
   .button {

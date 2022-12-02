@@ -8,7 +8,7 @@
   }[];
 </script>
 
-<ul class=" absolute left-0 top-4 rounded-lg bg-white shadow-lg">
+<ul class=" absolute left-0 top-4 rounded-lg bg-white shadow-lg z-10">
   {#each options as option}
     {#if !option.disabled}
       <!-- content here -->

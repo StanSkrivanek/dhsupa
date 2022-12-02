@@ -44,6 +44,8 @@ module.exports = {
         prim: '#edebef'
       },
       gridTemplateColumns: {
+        clientTable: ' 100px 1fr 125px 125px 32px 32px',
+        clientTableMobile: '1fr 90px',
         invoiceTable: '100px 100px 60px 1fr 116px 32px 32px',
         invoiceTableMobile: '1fr 90px',
         invoiceLineItem: '1fr 100px 100px 100px 65px'
@@ -67,7 +69,7 @@ module.exports = {
         circle: "url('/images/svg/hand-circle.svg')",
         chevronDown: "url('/images/svg/chevron--down.svg')",
         thankYou: "url('/images/svg/thankyou.svg')",
-        error_404: "url('/images/svg/bgError.svg')",
+        error_404: "url('/images/svg/bgError.svg')"
       },
       backgroundPosition: {
         'right-center': '97% center'
