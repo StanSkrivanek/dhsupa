@@ -55,7 +55,7 @@ export const addThousandSeparator = (num: string): string => {
  */
 export const sumInvoices = (invoices: Invoice[] | undefined): number => {
   if (!invoices) return 0;
-  return invoices.reduce((prevValue, curValue) => prevValue + sumLineItems(curValue.lineItems), 0);
+  return invoices.reduce((prevValue, curValue) => prevValue + invoiceTotal(curValue.lineItems, curValue.discount), 0);
 };
 /**
  * convert amount in decimal format to cents
@@ -67,7 +67,7 @@ export const dollarsToCents = (dollars: number): number => {
 };
 
 /**
- * takes lineItems nad discount and returns the invoice total
+ * takes lineItems plus discount and returns the invoice total
  * @param {Array | undefined} lineItems
  * @param {number | undefined} discount
  * @returns {number}
