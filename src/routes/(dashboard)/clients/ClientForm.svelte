@@ -3,7 +3,7 @@
   import Trash from '$lib/components/Icon/Trash.svelte';
   import Check from '$lib/components/Icon/Check.svelte';
   import { states } from '$lib/utils/states';
-  import { addClient, clients, loadClients, updateClient } from '$lib/stores/ClientStore';
+  import { addClient, updateClient } from '$lib/stores/ClientStore';
   import { snackbar } from '$lib/stores/SnackbarStore';
 
   export let closePanel: () => void = () => {};
@@ -20,7 +20,6 @@
       updateClient(client);
       snackbar.send({ message: 'Client was updated', type: 'success' });
     }
-    addClient(client);
 
     closePanel();
   };
