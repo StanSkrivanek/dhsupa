@@ -8,13 +8,15 @@
   import Activate from '$lib/components/Icon/Activate.svelte';
   import Archive from '$lib/components/Icon/Archive.svelte';
   import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
+  import SlidePanel from '$lib/components/SlidePanel.svelte';
+  import ClientForm from './ClientForm.svelte';
 
   export let client: Client;
-  console.log({ client });
+  // console.log({ client });
   let isAdditionalMenuShowing = false;
+  let isClientFormShowing = false;
   //   let isOptionsDisabled = false;
   //   let isModalShowing = false;
-  //   let isInvoiceFormShowing = false;
 
   const recievedInvoices = () => {
     if (client?.invoices) {
@@ -27,7 +29,7 @@
     }
   };
   const balanceInvoices = () => {
-   if (client?.invoices) {
+    if (client?.invoices) {
       // get invoices that have NOT been paid
       const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus !== 'paid');
       //   get the sum of all unpaid invoices
@@ -41,7 +43,7 @@
     isAdditionalMenuShowing = !isAdditionalMenuShowing;
   };
   const handleEdit = () => {
-    // isInvoiceFormShowing = true;
+    isClientFormShowing = true;
     isAdditionalMenuShowing = false;
   };
   const handleActivate = () => {
@@ -56,13 +58,21 @@
     // isModalShowing = true;
     isAdditionalMenuShowing = false;
   };
+
+  const closePanel = () => {
+    isClientFormShowing = false;
+  };
 </script>
 
 <div class="client-table rounded-lg bg-white py-3 shadow-tableRow lg:py-6">
   <div><Tag className="ml-auto" label={client.clientStatus} /></div>
   <div class="truncate whitespace-nowrap text-base lg:text-xl">{client.name}</div>
-  <div class="text-right font-mono text-sm font-bold lg:text-lg">${centsToDollars(recievedInvoices())}</div>
-  <div class="text-right font-mono text-sm font-bold text-scarlet lg:text-lg">${centsToDollars(balanceInvoices())}</div>
+  <div class="text-right font-mono text-sm font-bold lg:text-lg">
+    ${centsToDollars(recievedInvoices())}
+  </div>
+  <div class="text-right font-mono text-sm font-bold text-scarlet lg:text-lg">
+    ${centsToDollars(balanceInvoices())}
+  </div>
   <div class="viewBtn hidden text-sm lg:block ">
     <a href="#" class="center text-pastelPurple hover:text-daisyBush"><Eye /></a>
   </div>
@@ -92,3 +102,9 @@
     {/if}
   </div>
 </div>
+
+{#if isClientFormShowing}
+  <SlidePanel on:closePanel={closePanel}>
+    <ClientForm {closePanel} formState="edit" {client}/>
+  </SlidePanel>
+{/if}

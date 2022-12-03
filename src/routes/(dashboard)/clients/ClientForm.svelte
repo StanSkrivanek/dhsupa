@@ -3,7 +3,8 @@
   import Trash from '$lib/components/Icon/Trash.svelte';
   import Check from '$lib/components/Icon/Check.svelte';
   import { states } from '$lib/utils/states';
-  import { addClient, clients, loadClients } from '$lib/stores/ClientStore';
+  import { addClient, clients, loadClients, updateClient } from '$lib/stores/ClientStore';
+  import { snackbar } from '$lib/stores/SnackbarStore';
 
   export let closePanel: () => void = () => {};
   export let formState: 'create' | 'edit' = 'create';
@@ -11,6 +12,14 @@
 
   const handleSubmit = () => {
     // console.log({ client });
+    if (formState === 'create') {
+      addClient(client);
+      snackbar.send({ message: 'Client was created', type: 'success' });
+      //   closePanel();
+    } else {
+      updateClient(client);
+      snackbar.send({ message: 'Client was updated', type: 'success' });
+    }
     addClient(client);
 
     closePanel();
@@ -18,7 +27,7 @@
 </script>
 
 <h2 class="mb-7 font-sansSerif text-3xl font-bold text-daisyBush ">
-  {#if formState === 'create'} Add {:else} Edit {/if} Client
+  {#if formState === 'create'} Add {:else} Edit {/if} a Client
 </h2>
 
 <form action="" class="grid grid-cols-6 gap-x-5" on:submit|preventDefault={handleSubmit}>
