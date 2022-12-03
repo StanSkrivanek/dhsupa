@@ -5,9 +5,17 @@
   import Button from '$lib/components/Button.svelte';
   import ClientRowHeader from './ClientRowHeader.svelte';
   import ClientRow from './ClientRow.svelte';
-    import BlankState from '../invoices/BlankState.svelte';
-
+  import BlankState from '../invoices/BlankState.svelte';
+  import SlidePanel from '$lib/components/SlidePanel.svelte';
+    import ClientForm from './ClientForm.svelte';
+  
   let isClientFormShowing: boolean = false;
+
+  const closePanel = () => {
+    isClientFormShowing = false;
+  };
+
+
   onMount(() => {
     loadClients();
     // console.log($clients);
@@ -43,7 +51,7 @@
     loading ...
   {:else if $clients.length <= 0}
     <!-- <div class="text-center text-gray-500">No clients yet</div> -->
-    <BlankState/>
+    <BlankState />
   {:else}
     <!-- client header row -->
     <ClientRowHeader />
@@ -55,3 +63,10 @@
     {/each}
   {/if}
 </div>
+
+{#if isClientFormShowing}
+  <SlidePanel on:closePanel={closePanel}>
+    <ClientForm {closePanel}/>
+  </SlidePanel>
+{/if}
+

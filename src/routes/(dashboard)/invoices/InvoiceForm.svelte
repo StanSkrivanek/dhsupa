@@ -82,7 +82,7 @@
 
 <form action="" class="grid grid-cols-6 gap-x-5" on:submit|preventDefault={handleSubmit}>
   <!-- client -->
-  <div class=" field col-span-6 md:col-span-4">
+  <div class="field col-span-6 md:col-span-4">
     {#if !isNewClient}
       <label for="client">Client</label>
       <div class="flex flex-wrap items-center  gap-x-2 sm:flex-nowrap md:gap-x-4">
