@@ -48,7 +48,9 @@ module.exports = {
         clientTableMobile: '1fr 90px',
         invoiceTable: '100px 100px 60px 1fr 116px 32px 32px',
         invoiceTableMobile: '1fr 90px',
-        invoiceLineItem: '1fr 100px 100px 100px 65px'
+        invoiceLineItem: '1fr 100px 100px 100px 65px',
+        invoiceLineItemPrint: '1fr 100px 100px 100px'
+
       },
       minHeight: {
         24: '6rem'

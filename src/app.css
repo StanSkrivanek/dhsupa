@@ -55,7 +55,6 @@
 }
 
 @layer components {
-
   .invoice-table {
     @apply mb-3 grid w-full grid-cols-invoiceTable gap-x-4 px-4 lg:px-6;
   }
@@ -65,7 +64,7 @@
   }
 
   .invoice-line-item {
-    @apply relative grid gap-4 sm:grid-cols-invoiceLineItem;
+    @apply relative grid gap-4 sm:grid-cols-invoiceLineItemPrint;
     grid-template-areas:
       'description description description'
       'unitPrice quantity amount';
@@ -77,12 +76,11 @@
     }
   }
 
-@media print {
-  .invoice-line-item {
-    grid-template-areas: 'description unitPrice quantity amount trash';
+  @media print {
+    .invoice-line-item {
+      grid-template-areas: 'description unitPrice quantity amount trash';
+    }
   }
-}
-
 
 
   .invoice-line-item .description {
@@ -102,9 +100,8 @@
     grid-area: trash;
   }
 
-
-  .client-table{
-    @apply grid w-full grid-cols-clientTableMobile lg:grid-cols-clientTable gap-x-4 mb-4 lg:mb-6 px-4 lg:px-6;
+  .client-table {
+    @apply mb-4 grid w-full grid-cols-clientTableMobile gap-x-4 px-4 lg:mb-6 lg:grid-cols-clientTable lg:px-6;
   }
 
   .button {

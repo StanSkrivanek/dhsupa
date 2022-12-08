@@ -98,7 +98,7 @@
     @apply h-10 w-full border-b-2 border-dotted border-stone-300;
   }
   input[type='text'] {
-    @apply font-sansSerif text-xl font-bold;
+    @apply font-sansSerif text-xl font-bold print:text-base;
   }
   input[type='number'] {
     @apply font-mono text-base;
@@ -113,5 +113,11 @@
   }
   .line-item-label {
     @apply block font-sansSerif text-sm font-bold text-stone-500 print:hidden sm:hidden;
+  }
+  /* fir Safari */
+  input[type='text'] {
+    font-size: 16px;
+    color: #000;
+    @apply text-base font-bold;
   }
 </style>

@@ -18,7 +18,7 @@
   //   let isOptionsDisabled = false;
   //   let isModalShowing = false;
 
-  const recievedInvoices = () => {
+  const receivedInvoices = () => {
     if (client?.invoices) {
       // get invoices that have been paid
       const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus === 'paid');
@@ -64,19 +64,19 @@
   };
 </script>
 
-<div class="client-table rounded-lg bg-white py-3 shadow-tableRow lg:py-6">
-  <div><Tag className="ml-auto" label={client.clientStatus} /></div>
-  <div class="truncate whitespace-nowrap text-base lg:text-xl">{client.name}</div>
-  <div class="text-right font-mono text-sm font-bold lg:text-lg">
-    ${centsToDollars(recievedInvoices())}
+<div class="client-row client-table rounded-lg bg-white py-3 shadow-tableRow lg:py-6">
+  <div class="status"><Tag className="ml-auto" label={client.clientStatus} /></div>
+  <div class="client-name truncate whitespace-nowrap text-base lg:text-xl">{client.name}</div>
+  <div class="received text-right font-mono text-sm font-bold lg:text-lg">
+    ${centsToDollars(receivedInvoices())}
   </div>
-  <div class="text-right font-mono text-sm font-bold text-scarlet lg:text-lg">
+  <div class="balance text-right font-mono text-sm font-bold text-scarlet lg:text-lg">
     ${centsToDollars(balanceInvoices())}
   </div>
-  <div class="viewBtn hidden text-sm lg:block ">
+  <div class=" viewBtn hidden text-sm lg:block ">
     <a href="#" class="center text-pastelPurple hover:text-daisyBush"><Eye /></a>
   </div>
-  <div class="moreBtn relative hidden text-sm lg:block">
+  <div class=" moreBtn relative hidden text-sm lg:block">
     <button class="center text-pastelPurple hover:text-daisyBush" on:click={toggleAdditionalMenu}
       ><ThreeDots /></button
     >
@@ -105,6 +105,47 @@
 
 {#if isClientFormShowing}
   <SlidePanel on:closePanel={closePanel}>
-    <ClientForm {closePanel} formState="edit" {client}/>
+    <ClientForm {closePanel} formState="edit" {client} />
   </SlidePanel>
 {/if}
+
+<style lang="postcss">
+  .client-row {
+    grid-template-areas:
+      'clientName status'
+      'received balance';
+      row-gap: .5rem;
+  }
+  @media (min-width: 1024px) {
+    .client-row {
+      grid-template-areas: 'status clientName received balance view more';
+    }
+  }
+  .client-name {
+    grid-area: clientName;
+  }
+  .status {
+    grid-area: status;
+  }
+  .received {
+    grid-area: received;
+    @apply text-left lg:text-right;
+  }
+  .received:before {
+    @apply block text-xs lg:hidden;
+    content: 'Received: ';
+  }
+  .balance {
+    grid-area: balance;
+  }
+  .balance:before {
+    @apply block text-xs lg:hidden;
+    content: 'Balance';
+  }
+  .viewBtn {
+    grid-area: view;
+  }
+  .moreBtn {
+    grid-area: more;
+  }
+</style>
