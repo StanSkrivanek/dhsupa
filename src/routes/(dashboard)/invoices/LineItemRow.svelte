@@ -1,7 +1,11 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import Trash from '$lib/components/Icon/Trash.svelte';
-  import { twoDecimals, dollarsToCents, centsToDollars, centsToDollarsWithoutCommas } from '$lib/utils/moneyHelpers';
+  import {
+    twoDecimals,
+    dollarsToCents,
+    centsToDollarsWithoutCommas
+  } from '$lib/utils/moneyHelpers';
 
   export let lineItem: LineItem;
   export let canDelete: boolean = false;
@@ -44,7 +48,7 @@
         dispatch('updateLineItem', lineItem);
       }}
       required={isRequired}
-        disabled={!isEditable}
+      disabled={!isEditable}
     />
   </div>
   <div class="quantity">
@@ -60,7 +64,7 @@
         dispatch('updateLineItem', lineItem);
       }}
       required={isRequired}
-        disabled={!isEditable}
+      disabled={!isEditable}
     />
   </div>
   <div class="amount">
@@ -108,6 +112,6 @@
     @apply border-b-0 bg-transparent px-0;
   }
   .line-item-label {
-    @apply block sm:hidden text-stone-500 font-sansSerif text-sm font-bold;
+    @apply block font-sansSerif text-sm font-bold text-stone-500 print:hidden sm:hidden;
   }
 </style>

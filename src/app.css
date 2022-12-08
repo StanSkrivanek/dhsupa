@@ -76,6 +76,15 @@
       grid-template-areas: 'description unitPrice quantity amount trash';
     }
   }
+
+@media print {
+  .invoice-line-item {
+    grid-template-areas: 'description unitPrice quantity amount trash';
+  }
+}
+
+
+
   .invoice-line-item .description {
     grid-area: description;
   }

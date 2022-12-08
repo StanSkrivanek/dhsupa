@@ -33,12 +33,12 @@ interface LineItem {
 }
 
 interface Settings {
-  Name: string;
-  Email: string;
-  Street: string;
-  City: string;
-  State: string;
-  Zip: string;
+  myName: string;
+  email: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
 }
 
 type NotificationType = "success" | "error" | "info" | "warning";
