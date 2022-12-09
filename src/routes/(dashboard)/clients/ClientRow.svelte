@@ -74,7 +74,7 @@
     ${centsToDollars(balanceInvoices())}
   </div>
   <div class=" viewBtn hidden text-sm lg:block ">
-    <a href="#" class="center text-pastelPurple hover:text-daisyBush"><Eye /></a>
+    <a href={`/clients/${client.id}`} class="center text-pastelPurple hover:text-daisyBush"><Eye /></a>
   </div>
   <div class=" moreBtn relative hidden text-sm lg:block">
     <button class="center text-pastelPurple hover:text-daisyBush" on:click={toggleAdditionalMenu}
@@ -114,7 +114,7 @@
     grid-template-areas:
       'clientName status'
       'received balance';
-      row-gap: .5rem;
+    row-gap: 0.5rem;
   }
   @media (min-width: 1024px) {
     .client-row {

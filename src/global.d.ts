@@ -5,9 +5,9 @@ interface Invoice {
   issueDate: string;
   invoiceNumber: string;
   dueDate: string;
-  subject?: string;
-  lineItems?: LineItem[];
-  discount?: number;
+  subject: string;
+  lineItems: LineItem[];
+  discount: number;
   notes?: string;
   terms?: string;
   createdAt: string;

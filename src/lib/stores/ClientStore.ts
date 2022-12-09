@@ -20,10 +20,6 @@ export const updateClient = (clientToUpdate: Client) => {
   return clientToUpdate;
 };
 
-// export const updateClient = (clientToUpdate: Client) => {
-//   clients.update((prev: Client[]) => {
-//     const index = prev.findIndex((client) => client.id === clientToUpdate.id);
-//     prev[index] = clientToUpdate;
-//     return prev;
-//   });
-// }
+export const getClientById = (id: string) => {
+ return data.clients.find((client) => client.id === id);
+}

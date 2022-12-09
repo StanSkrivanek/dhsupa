@@ -147,7 +147,7 @@
   <!-- TODO: set number to auto increase with each new invoice -->
   <div class="field col-span-6 row-start-1 md:col-span-2 md:row-start-auto">
     <label for="invoiceNr">Invoice Nr</label>
-    <input type="number" name="invoiceNr" id="" required bind:value={invoice.invoiceNumber} />
+    <input type="text" name="invoiceNr" id="" required bind:value={invoice.invoiceNumber} />
   </div>
 
   <!-- new client details -->

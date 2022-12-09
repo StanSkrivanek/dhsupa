@@ -1,13 +1,14 @@
 {
   "clients": [
     {
+      "id": "1",
       "city": "Somewhereville",
       "clientStatus": "active",
       "email": "compressed@example.com",
-      "id": "1",
       "invoices": [
         {
           "client": {
+            "id":"1",
             "name": "Compressed.fm"
           },
           "createdAt": "2022-07-01",
@@ -37,6 +38,7 @@
         },
         {
           "client": {
+            "id":"2",
             "name": "Compressed.fm"
           },
           "createdAt": "2022-07-01",
@@ -69,13 +71,14 @@
       "zip": "12345"
     },
     {
+      "id": "2",
       "city": "Nowhere",
       "clientStatus": "archive",
       "email": "everythingsvelte@test.com",
-      "id": "2",
       "invoices": [
         {
           "client": {
+            "id":"3",
             "name": "Everything Svelte"
           },
           "createdAt": "2022-07-01",
@@ -107,10 +110,10 @@
       "zip": "67890"
     },
     {
+      "id": "3",
       "city": "Anywhere",
       "clientStatus": "active",
       "email": "zeal@test.com",
-      "id": "3",
       "invoices": [
         {
           "client": {
@@ -232,9 +235,9 @@
     },
     {
       "client": {
+
         "city": "Nowhereville",
         "email": "svelte@example.com",
-        "id": "2",
         "name": "Everything Svelte",
         "state": "FL",
         "street": "456 State Street",
@@ -264,9 +267,9 @@
     },
     {
       "client": {
+
         "city": "Anywhereville",
         "email": "zeal@example.com",
-        "id": "3",
         "name": "ZEAL",
         "state": "CA",
         "street": "789 Common Drive",
@@ -292,7 +295,6 @@
       "client": {
         "city": "Anywhereville",
         "email": "zeal@example.com",
-        "id": "3",
         "name": "ZEAL",
         "state": "CA",
         "street": "789 Common Drive",
