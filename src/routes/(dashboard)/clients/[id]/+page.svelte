@@ -12,8 +12,10 @@
   import SlidePanel from '$lib/components/SlidePanel.svelte';
   import Edit from '$lib/components/Icon/Edit.svelte';
   import ClientForm from '../ClientForm.svelte';
+    import { isLate } from '$lib/utils/dateHelpers';
 
-  export let data: PageData;
+  // export let data: PageData;
+  export let data: { client: Client };
   $: ({ client } = data);
 
   console.log('data', data, client);
@@ -30,6 +32,29 @@
   function closePanel() {
     isClientFormShowing = false;
   }
+  function getDraft(){
+    if (!client.invoices || client.invoices.length < 1) return '0.00';
+    const draftInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus === 'draft');
+    return centsToDollars(sumInvoices(draftInvoices));
+  }
+  function getPaid(){
+    if (!client.invoices || client.invoices.length < 1) return '0.00';
+    const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus === 'paid');
+    return centsToDollars(sumInvoices(paidInvoices));
+  }
+
+  function getTotalOverdue():string{
+  if (!client.invoices || client.invoices.length < 1) return '0.00';
+    const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus === 'sent' && isLate(invoice.dueDate));
+    return centsToDollars(sumInvoices(paidInvoices));
+  }
+  function getTotalOutstanding():string{
+  if (!client.invoices || client.invoices.length < 1) return '0.00';
+    const paidInvoices = client.invoices.filter((invoice) => invoice.invoiceStatus === 'sent' && !isLate(invoice.dueDate));
+    return centsToDollars(sumInvoices(paidInvoices));
+  }
+
+
 </script>
 
 <svelte:head>
@@ -39,7 +64,7 @@
 <div
   class="mb-7 flex flex-col-reverse items-start justify-between gap-y-6 md:flex-row md:items-center lg:mb-16"
 >
-  {#if client && client.invoices.length > 0}
+  {#if client?.invoices && client.invoices.length > 0}
     <Search />
   {:else}
     <div />
@@ -65,22 +90,22 @@
   />
 </div>
 
-<div class="mb-10 grid grid-cols-1 lg:grid-cols-4 gap-4 rounded-lg bg-gallery py-7 px-10">
+<div class="mb-10 grid grid-cols-1 gap-4 rounded-lg bg-gallery py-7 px-10 lg:grid-cols-4">
   <div class="summary-block">
     <div class="label">Total Overdue</div>
-    <div class="number"><sup>$</sup>500.00</div>
+    <div class="number"><sup>$</sup>{getTotalOverdue()}</div>
   </div>
   <div class="summary-block">
     <div class="label">Total Outstanding</div>
-    <div class="number"><sup>$</sup>500.00</div>
+    <div class="number"><sup>$</sup>{getTotalOutstanding()}</div>
   </div>
   <div class="summary-block">
     <div class="label">Total Draft</div>
-    <div class="number"><sup>$</sup>500.00</div>
+    <div class="number"><sup>$</sup>{getDraft()}</div>
   </div>
   <div class="summary-block">
     <div class="label">Total Paid</div>
-    <div class="number"><sup>$</sup>500.00</div>
+    <div class="number"><sup>$</sup>{getPaid()}</div>
   </div>
 </div>
 
@@ -89,12 +114,12 @@
   {#if client && client.invoices === null}
     <!-- content here -->
     Lodaing...
-  {:else if client && client.invoices.length <= 0}
+  {:else if client.invoices && client.invoices.length <= 0}
     <BlankState />
   {:else}
     <!-- list of invoices -->
     <InvoiceRowHeader className="text-daisyBush" />
-    {#if client}
+    {#if client.invoices}
       <div class="">
         <!-- content here -->
         {#each client.invoices as invoice}
