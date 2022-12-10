@@ -50,7 +50,6 @@ module.exports = {
         invoiceTableMobile: '1fr 90px',
         invoiceLineItem: '1fr 100px 100px 100px 65px',
         invoiceLineItemPrint: '1fr 100px 100px 100px'
-
       },
       minHeight: {
         24: '6rem'
@@ -71,7 +70,8 @@ module.exports = {
         circle: "url('/images/svg/hand-circle.svg')",
         chevronDown: "url('/images/svg/chevron--down.svg')",
         thankYou: "url('/images/svg/thankyou.svg')",
-        error_404: "url('/images/svg/bgError.svg')"
+        error_404: "url('/images/svg/bgError.svg')",
+        auth: "url('/images/svg/bg-auth.svg')"
       },
       backgroundPosition: {
         'right-center': '97% center'
