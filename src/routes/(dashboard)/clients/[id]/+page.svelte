@@ -136,9 +136,9 @@
   <!-- content here -->
   <SlidePanel on:closePanel={closePanel}>
     <ClientForm
-      {closePanel}
-      formStatus={isEditingCurrentClient ? 'edit' : 'create'}
-      client={isEditingCurrentClient ? data.client : undefined}
+    {closePanel}
+    formStatus={isEditingCurrentClient ? 'edit' : 'create'}
+    client={isEditingCurrentClient ? data.client : undefined}
     />
   </SlidePanel>
 {/if}

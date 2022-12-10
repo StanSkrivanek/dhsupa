@@ -9,7 +9,7 @@
   export let closePanel: () => void = () => {};
   export let formState: 'create' | 'edit' = 'create';
   export let client: Client = {} as Client;
-
+  // export let formStatus;
   const handleSubmit = () => {
     // console.log({ client });
     if (formState === 'create') {
