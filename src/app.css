@@ -82,7 +82,6 @@
     }
   }
 
-
   .invoice-line-item .description {
     grid-area: description;
   }
@@ -106,6 +105,12 @@
 
   .button {
     @apply relative flex items-center whitespace-nowrap rounded-md px-5 py-[0.35rem] font-sansSerif text-base font-black  lg:px-10 lg:py-3 lg:text-xl;
+  }
+  .auth-heading {
+    @apply mb-4 text-[2.5rem] font-black text-goldenFizz;
+  }
+  .auth-btn {
+    @apply mt-6 min-h-[3.5rem] w-full rounded-lg bg-robinEggBlue p-4 text-xl font-bold text-daisyBush transition-shadow duration-200 hover:shadow-lg;
   }
 }
 
