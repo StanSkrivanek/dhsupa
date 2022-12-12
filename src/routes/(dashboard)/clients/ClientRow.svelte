@@ -7,9 +7,10 @@
   import AdditionalOptions from '$lib/components/AdditionalOptions.svelte';
   import Activate from '$lib/components/Icon/Activate.svelte';
   import Archive from '$lib/components/Icon/Archive.svelte';
-  import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
   import SlidePanel from '$lib/components/SlidePanel.svelte';
   import ClientForm from './ClientForm.svelte';
+  import { centsToDollars, sumInvoices } from '$lib/utils/moneyHelpers';
+  import { clickOutside } from '$lib/actions/ClickOutside';
 
   export let client: Client;
   // console.log({ client });
@@ -74,9 +75,14 @@
     ${centsToDollars(balanceInvoices())}
   </div>
   <div class=" viewBtn hidden text-sm lg:block ">
-    <a href={`/clients/${client.id}`} class="center text-pastelPurple hover:text-daisyBush"><Eye /></a>
+    <a href={`/clients/${client.id}`} class="center text-pastelPurple hover:text-daisyBush"
+      ><Eye /></a
+    >
   </div>
-  <div class=" moreBtn relative hidden text-sm lg:block">
+  <div
+    class=" moreBtn relative hidden text-sm lg:block"
+    use:clickOutside={() => (isAdditionalMenuShowing = false)}
+  >
     <button class="center text-pastelPurple hover:text-daisyBush" on:click={toggleAdditionalMenu}
       ><ThreeDots /></button
     >
